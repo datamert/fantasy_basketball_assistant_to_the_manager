@@ -1,0 +1,7 @@
+papermill
+nba_api
+azure-identity
+azure-storage-file-datalake
+pyarrow
+pandas
+requests

@@ -29,8 +29,9 @@ jobs:
 
       - name: Run notebook with Papermill
         run: |
-          papermill notebooks/ingest_nba_stats.ipynb notebooks/output.ipynb
+          papermill notebooks/nba_player_logs.ipynb notebooks/output.ipynb
         env:
           FABRIC_CLIENT_ID: ${{ secrets.FABRIC_CLIENT_ID }}
           FABRIC_TENANT_ID: ${{ secrets.FABRIC_TENANT_ID }}
           FABRIC_CLIENT_SECRET: ${{ secrets.FABRIC_CLIENT_SECRET }}
+

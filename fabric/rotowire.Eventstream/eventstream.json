@@ -1,0 +1,26 @@
+{
+  "sources": [
+    {
+      "id": "6c72780d-069e-436f-8f96-1c43d5693306",
+      "name": "CustomEndpoint-Source",
+      "type": "CustomEndpoint",
+      "properties": {}
+    }
+  ],
+  "destinations": [],
+  "streams": [
+    {
+      "id": "a6406447-4b33-4b53-ac67-934a3bef1a63",
+      "name": "rotowire-stream",
+      "type": "DefaultStream",
+      "properties": {},
+      "inputNodes": [
+        {
+          "name": "CustomEndpoint-Source"
+        }
+      ]
+    }
+  ],
+  "operators": [],
+  "compatibilityLevel": "1.1"
+}

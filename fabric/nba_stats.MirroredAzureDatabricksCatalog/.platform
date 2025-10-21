@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "MirroredAzureDatabricksCatalog",
+    "displayName": "nba_stats",
+    "description": ""
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "dce62400-41e5-a958-4819-9d56c97af184"
+  }
+}

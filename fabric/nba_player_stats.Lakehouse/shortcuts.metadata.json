@@ -6,9 +6,8 @@
       "type": "OneLake",
       "oneLake": {
         "path": "Tables/TestSchema",
-        "itemId": "c1917d8f-b339-9e7a-4521-e88654f92d2b",
-        "workspaceId": "00000000-0000-0000-0000-000000000000",
-        "artifactType": "MountedRelationalDatabase"
+        "itemId": "54f92d2b-e886-4521-9e7a-b339c1917d8f",
+        "workspaceId": "66503be7-cb73-4bf0-b14c-dfcdd90f8f13"
       }
     }
   }

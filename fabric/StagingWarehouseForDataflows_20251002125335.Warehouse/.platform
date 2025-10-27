@@ -1,11 +1,11 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
-    "type": "Eventstream",
-    "displayName": "rotowire"
+    "type": "Warehouse",
+    "displayName": "StagingWarehouseForDataflows_20251002125335"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "b6543348-0da1-85b1-4e20-9ba08cc3005d"
+    "logicalId": "fd09adaf-6b52-abb2-47cb-62e08198ebda"
   }
 }

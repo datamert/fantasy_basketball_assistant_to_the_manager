@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "KQLDatabase",
+    "displayName": "News",
+    "description": "News"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "1529a0b4-581d-88fd-468d-398d9f04ee02"
+  }
+}

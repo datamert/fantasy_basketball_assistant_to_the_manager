@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "MirroredDatabase",
+    "displayName": "NBA API Google Job Mirror"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "9b970d05-1ffd-bb23-4efa-030f23f739d1"
+  }
+}

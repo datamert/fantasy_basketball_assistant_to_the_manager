@@ -1,11 +1,11 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
-    "type": "Dataflow",
-    "displayName": "Dataflow 1"
+    "type": "Eventstream",
+    "displayName": "NBA_News"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "deca6b44-6d04-83d6-4f85-cae2fc50677b"
+    "logicalId": "71b2aafc-2987-bb0e-4eaf-df7ec668fd2d"
   }
 }

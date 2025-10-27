@@ -1,12 +1,11 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
-    "type": "MirroredAzureDatabricksCatalog",
-    "displayName": "nba_stats",
-    "description": ""
+    "type": "Lakehouse",
+    "displayName": "StagingLakehouseForDataflows_20251002125322"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "dce62400-41e5-a958-4819-9d56c97af184"
+    "logicalId": "73ea4065-dee8-ac51-4484-2321ade738a5"
   }
 }

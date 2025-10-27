@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Eventhouse",
+    "displayName": "NBA_News_and_Injuries",
+    "description": "NBA_News_and_Injuries"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "e85f8061-2c88-bedf-45e8-52e472d0bc9e"
+  }
+}

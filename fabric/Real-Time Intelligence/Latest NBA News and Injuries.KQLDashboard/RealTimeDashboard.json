@@ -1,0 +1,474 @@
+{
+  "schema_version": 63,
+  "pagesNavWidth": 241,
+  "tiles": [
+    {
+      "id": "a409efb4-e932-481a-aa9f-ddd78f677db7",
+      "title": "Injured Players by Game",
+      "visualType": "table",
+      "pageId": "b63a78b0-d8c1-4a65-8331-2a2b93cc48cf",
+      "layout": {
+        "x": 0,
+        "y": 4,
+        "width": 17,
+        "height": 10
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "d40f5cbf-d474-4da3-a5b1-bb8e5a993029"
+      },
+      "visualOptions": {
+        "table__enableRenderLinks": true,
+        "colorRulesDisabled": false,
+        "crossFilterDisabled": false,
+        "drillthroughDisabled": false,
+        "crossFilter": [],
+        "drillthrough": [],
+        "table__renderLinks": [],
+        "colorRules": [
+          {
+            "id": "d1e38862-99e4-479a-b0aa-cf11de694853",
+            "ruleType": "colorByCondition",
+            "applyToColumn": null,
+            "hideText": false,
+            "applyTo": "cells",
+            "conditions": [
+              {
+                "operator": "==",
+                "column": "CurrentStatus",
+                "values": [
+                  "Out"
+                ]
+              }
+            ],
+            "chainingOperator": "and",
+            "colorStyle": "bold",
+            "color": "red",
+            "tag": "",
+            "icon": null,
+            "ruleName": "",
+            "visualType": "table"
+          },
+          {
+            "id": "5301d413-5111-4c3c-bad9-448c9ef3fa38",
+            "ruleType": "colorByCondition",
+            "applyToColumn": null,
+            "hideText": false,
+            "applyTo": "cells",
+            "conditions": [
+              {
+                "operator": "==",
+                "column": "CurrentStatus",
+                "values": [
+                  "Available"
+                ]
+              }
+            ],
+            "chainingOperator": "and",
+            "colorStyle": "bold",
+            "color": "green",
+            "tag": "",
+            "icon": null,
+            "ruleName": "",
+            "visualType": "table"
+          },
+          {
+            "id": "14a3ddba-3b88-40e2-acb6-dc632d9e8a45",
+            "ruleType": "colorByCondition",
+            "applyToColumn": null,
+            "hideText": false,
+            "applyTo": "cells",
+            "conditions": [
+              {
+                "operator": "!=",
+                "column": "CurrentStatus",
+                "values": [
+                  "Out"
+                ]
+              },
+              {
+                "operator": "!=",
+                "column": "CurrentStatus",
+                "values": [
+                  "Available"
+                ]
+              }
+            ],
+            "chainingOperator": "and",
+            "colorStyle": "bold",
+            "color": "yellow",
+            "tag": "",
+            "icon": null,
+            "ruleName": "",
+            "visualType": "table"
+          }
+        ]
+      }
+    },
+    {
+      "id": "10416295-65e9-45d0-9f07-5575f4be96f5",
+      "title": "Latest NBA News from ESPN",
+      "visualType": "table",
+      "pageId": "b63a78b0-d8c1-4a65-8331-2a2b93cc48cf",
+      "layout": {
+        "x": 17,
+        "y": 0,
+        "width": 7,
+        "height": 14
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "8213ca91-ed01-4a99-b1d7-c6fadeef64af"
+      },
+      "visualOptions": {
+        "table__enableRenderLinks": true,
+        "colorRulesDisabled": false,
+        "crossFilterDisabled": false,
+        "drillthroughDisabled": false,
+        "crossFilter": [],
+        "drillthrough": [],
+        "table__renderLinks": [
+          {
+            "urlColumn": "Link",
+            "displayColumn": "Article",
+            "disabled": false
+          }
+        ],
+        "colorRules": [
+          {
+            "id": "a532322a-b4cf-4894-a6f9-9ab2a624cff6",
+            "ruleType": "colorByCondition",
+            "applyToColumn": "Link",
+            "hideText": true,
+            "applyTo": "cells",
+            "conditions": [
+              {
+                "operator": "!=",
+                "column": "Link",
+                "values": [
+                  ""
+                ]
+              }
+            ],
+            "chainingOperator": "and",
+            "colorStyle": "bold",
+            "color": null,
+            "tag": "",
+            "icon": null,
+            "ruleName": "",
+            "visualType": "table"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c8cee773-2b88-4129-af06-222c232b84c1",
+      "title": "Current Status of Injured Players",
+      "visualType": "multistat",
+      "pageId": "b63a78b0-d8c1-4a65-8331-2a2b93cc48cf",
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 9,
+        "height": 4
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "cfef1a6f-0b66-44b8-9d39-f1baefb7aa0a"
+      },
+      "visualOptions": {
+        "multiStat__textSize": "large",
+        "multiStat__valueColumn": null,
+        "colorRulesDisabled": false,
+        "multiStat__displayOrientation": "horizontal",
+        "multiStat__labelColumn": null,
+        "multiStat__slot": {
+          "width": 3,
+          "height": 1
+        },
+        "colorRules": [
+          {
+            "id": "9ae7da87-a5dd-4e87-bd29-4e41eec75576",
+            "ruleType": "colorByCondition",
+            "applyToColumn": null,
+            "hideText": false,
+            "applyTo": "cells",
+            "conditions": [
+              {
+                "operator": "==",
+                "column": "CurrentStatus",
+                "values": [
+                  "Available"
+                ]
+              }
+            ],
+            "chainingOperator": "and",
+            "colorStyle": "bold",
+            "color": "green",
+            "tag": "",
+            "icon": null,
+            "ruleName": "",
+            "visualType": "multistat"
+          },
+          {
+            "id": "cf58cf1f-c215-4709-b1d1-69de17754893",
+            "ruleType": "colorByCondition",
+            "applyToColumn": null,
+            "hideText": false,
+            "applyTo": "cells",
+            "conditions": [
+              {
+                "operator": "==",
+                "column": "CurrentStatus",
+                "values": [
+                  "Out"
+                ]
+              }
+            ],
+            "chainingOperator": "and",
+            "colorStyle": "bold",
+            "color": "red",
+            "tag": "",
+            "icon": null,
+            "ruleName": "",
+            "visualType": "multistat"
+          },
+          {
+            "id": "6c913dc4-55bd-471d-a69a-8be455666e5d",
+            "ruleType": "colorByCondition",
+            "applyToColumn": null,
+            "hideText": false,
+            "applyTo": "cells",
+            "conditions": [
+              {
+                "operator": "==",
+                "column": "CurrentStatus",
+                "values": [
+                  "Questionable"
+                ]
+              }
+            ],
+            "chainingOperator": "and",
+            "colorStyle": "bold",
+            "color": "yellow",
+            "tag": "",
+            "icon": null,
+            "ruleName": "",
+            "visualType": "multistat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "628fc4f3-35ad-4d73-aa85-f2a649f0536a",
+      "title": "Top 3 Reasons for Injuries",
+      "visualType": "table",
+      "pageId": "b63a78b0-d8c1-4a65-8331-2a2b93cc48cf",
+      "layout": {
+        "x": 9,
+        "y": 0,
+        "width": 8,
+        "height": 4
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "61903b78-b863-4feb-8967-6850293999fc"
+      },
+      "visualOptions": {
+        "table__enableRenderLinks": true,
+        "colorRulesDisabled": true,
+        "crossFilterDisabled": false,
+        "drillthroughDisabled": false,
+        "crossFilter": [],
+        "drillthrough": [],
+        "table__renderLinks": [],
+        "colorRules": []
+      }
+    }
+  ],
+  "baseQueries": [],
+  "parameters": [
+    {
+      "kind": "string",
+      "id": "8f621252-255b-4861-bb2e-af9a08da7753",
+      "displayName": "Team",
+      "description": "",
+      "variableName": "_team",
+      "selectionType": "array",
+      "includeAllOption": true,
+      "defaultValue": {
+        "kind": "all"
+      },
+      "dataSource": {
+        "kind": "query",
+        "columns": {
+          "value": "Team"
+        },
+        "queryRef": {
+          "kind": "query",
+          "queryId": "679471d8-323f-4245-85bc-e4c457783be0"
+        }
+      },
+      "showOnPages": {
+        "kind": "all"
+      },
+      "allIsNull": false
+    },
+    {
+      "kind": "string",
+      "id": "3b572433-a7e1-4f9b-9ec4-98fb10ccd2a8",
+      "displayName": "Matchup",
+      "description": "",
+      "variableName": "_matchup",
+      "selectionType": "array",
+      "includeAllOption": true,
+      "defaultValue": {
+        "kind": "all"
+      },
+      "dataSource": {
+        "kind": "query",
+        "columns": {
+          "value": "Matchup"
+        },
+        "queryRef": {
+          "kind": "query",
+          "queryId": "59394071-2e70-4989-9bd4-24bf156e3342"
+        }
+      },
+      "showOnPages": {
+        "kind": "all"
+      },
+      "allIsNull": false
+    },
+    {
+      "kind": "string",
+      "id": "4867b7be-0f59-4429-8f46-bcb669cfb992",
+      "displayName": "Game Date",
+      "description": "",
+      "variableName": "_gamedate",
+      "selectionType": "array",
+      "includeAllOption": true,
+      "defaultValue": {
+        "kind": "all"
+      },
+      "dataSource": {
+        "kind": "query",
+        "columns": {
+          "value": "GameDate",
+          "label": "GameDate"
+        },
+        "queryRef": {
+          "kind": "query",
+          "queryId": "d228c746-0c4d-44e6-a7ff-5a430d43236d"
+        }
+      },
+      "showOnPages": {
+        "kind": "all"
+      },
+      "allIsNull": false
+    }
+  ],
+  "dataSources": [
+    {
+      "kind": "kusto-trident",
+      "scopeId": "kusto-trident",
+      "clusterUri": "",
+      "database": "bddc63a0-7b46-85d6-4910-97c7231b0d05",
+      "name": "Injury",
+      "id": "249792b4-3160-4b3c-b573-ccc84915afe8",
+      "workspace": "00000000-0000-0000-0000-000000000000"
+    },
+    {
+      "kind": "kusto-trident",
+      "scopeId": "kusto-trident",
+      "clusterUri": "",
+      "database": "1529a0b4-581d-88fd-468d-398d9f04ee02",
+      "name": "News",
+      "id": "fe64dda1-0920-4fbb-951e-f6318c3060d0",
+      "workspace": "00000000-0000-0000-0000-000000000000"
+    }
+  ],
+  "pages": [
+    {
+      "name": "Overview",
+      "id": "b63a78b0-d8c1-4a65-8331-2a2b93cc48cf"
+    }
+  ],
+  "queries": [
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "249792b4-3160-4b3c-b573-ccc84915afe8"
+      },
+      "text": "nba_injury_reports_latest\n| where Team in (_team) and Matchup in (_matchup) and GameDate in (_gamedate)\n| project PlayerName, Team, CurrentStatus, Reason, Matchup, GameDate",
+      "id": "d40f5cbf-d474-4da3-a5b1-bb8e5a993029",
+      "usedVariables": [
+        "_gamedate",
+        "_matchup",
+        "_team"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "fe64dda1-0920-4fbb-951e-f6318c3060d0"
+      },
+      "text": "nba_news_latest\n| serialize\n| order by row_number() desc\n| project Article = ['title'], Link = url",
+      "id": "8213ca91-ed01-4a99-b1d7-c6fadeef64af",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "249792b4-3160-4b3c-b573-ccc84915afe8"
+      },
+      "text": "nba_injury_reports_latest\n| where Team in (_team) and Matchup in (_matchup) and GameDate in (_gamedate)\n| project PlayerName, Team, CurrentStatus, Reason, Matchup, GameDate\n| summarize arg_max(GameDate, *) by PlayerName\n| summarize count() by CurrentStatus\n| project Count = count_, CurrentStatus",
+      "id": "cfef1a6f-0b66-44b8-9d39-f1baefb7aa0a",
+      "usedVariables": [
+        "_gamedate",
+        "_matchup",
+        "_team"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "249792b4-3160-4b3c-b573-ccc84915afe8"
+      },
+      "text": "nba_injury_reports_latest\n| where Team in (_team) and Matchup in (_matchup) and GameDate in (_gamedate)\n| project PlayerName, Team, CurrentStatus, Reason, Matchup, GameDate\n| summarize arg_max(GameDate, *) by PlayerName\n| summarize count() by Reason\n| project Reason, ['Injured Players'] = count_\n| where Reason !contains \"G League\"\n| top 3 by ['Injured Players'] desc",
+      "id": "61903b78-b863-4feb-8967-6850293999fc",
+      "usedVariables": [
+        "_gamedate",
+        "_matchup",
+        "_team"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "249792b4-3160-4b3c-b573-ccc84915afe8"
+      },
+      "text": "nba_injury_reports_latest\n| distinct Team",
+      "id": "679471d8-323f-4245-85bc-e4c457783be0",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "249792b4-3160-4b3c-b573-ccc84915afe8"
+      },
+      "text": "nba_injury_reports_latest\n| distinct Matchup",
+      "id": "59394071-2e70-4989-9bd4-24bf156e3342",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "249792b4-3160-4b3c-b573-ccc84915afe8"
+      },
+      "text": "nba_injury_reports_latest\n| distinct GameDate",
+      "id": "d228c746-0c4d-44e6-a7ff-5a430d43236d",
+      "usedVariables": []
+    }
+  ]
+}

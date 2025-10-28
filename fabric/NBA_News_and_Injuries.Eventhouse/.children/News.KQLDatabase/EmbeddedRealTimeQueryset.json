@@ -1,0 +1,28 @@
+{
+  "queryset": {
+    "version": "1.0.0",
+    "dataSources": [
+      {
+        "id": "89707c17-e29e-49db-a789-a2079d7199cd",
+        "clusterUri": "https://trd-tmc5hqu3akwr7xcrwd.z5.kusto.fabric.microsoft.com",
+        "type": "Fabric",
+        "databaseItemId": "9f04ee02-398d-468d-88fd-581d1529a0b4",
+        "databaseItemName": "News"
+      }
+    ],
+    "tabs": [
+      {
+        "id": "983af7ec-e180-4c34-a752-e4e6a9f5b065",
+        "content": ".create materialized-view with(lookback=7d, lookback_column='EventEnqueuedUtcTime', backfill=true) nba_news_latest on table nba_news_raw\n{\n  nba_news_raw\n  | summarize arg_max(EventEnqueuedUtcTime, *) by url\n}",
+        "title": "",
+        "dataSourceId": "89707c17-e29e-49db-a789-a2079d7199cd"
+      },
+      {
+        "id": "59a67a4c-6fa9-456e-ac36-ec83d8de2c43",
+        "content": "nba_news_latest",
+        "title": "",
+        "dataSourceId": "89707c17-e29e-49db-a789-a2079d7199cd"
+      }
+    ]
+  }
+}

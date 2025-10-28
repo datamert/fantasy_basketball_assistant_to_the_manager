@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
     "type": "KQLDatabase",
-    "displayName": "Injuries",
-    "description": "Injuries"
+    "displayName": "Injury",
+    "description": "Injury"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "e1170571-2b31-9c22-4011-c8a8f39b6169"
+    "logicalId": "bddc63a0-7b46-85d6-4910-97c7231b0d05"
   }
 }

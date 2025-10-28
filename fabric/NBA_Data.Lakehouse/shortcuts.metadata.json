@@ -1,0 +1,28 @@
+[
+  {
+    "name": "nba_api",
+    "path": "/Tables",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/nba_api",
+        "itemId": "9b970d05-1ffd-bb23-4efa-030f23f739d1",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "artifactType": "MountedRelationalDatabase"
+      }
+    }
+  },
+  {
+    "name": "nba_injury_reports_raw",
+    "path": "/Tables/injury",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/nba_injury_reports_raw",
+        "itemId": "bddc63a0-7b46-85d6-4910-97c7231b0d05",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "artifactType": "KustoDatabase"
+      }
+    }
+  }
+]

@@ -1,0 +1,205 @@
+[
+  {
+    "uniqueIdentifier": "e6971cb0-465a-4f2c-a49d-90de21f0ffc9",
+    "payload": {
+      "name": "Injury",
+      "type": "kqlQueries"
+    },
+    "type": "container-v1"
+  },
+  {
+    "uniqueIdentifier": "a4600eea-c268-4854-b5e8-38d061fa27b7",
+    "payload": {
+      "name": "Injury event",
+      "runSettings": {
+        "executionIntervalInSeconds": 1800
+      },
+      "query": {
+        "queryString": "nba_injury_reports_latest\r\n| join kind=inner (external_table(\"players_to_track_injuries\")) on $left.PlayerName == $right.PlayerName\r\n| project PlayerName, CurrentStatus, Reason, Team, GameDate, PlayerName1\r\n| summarize arg_max(GameDate, *) by PlayerName"
+      },
+      "eventhouseItem": {
+        "itemId": "bddc63a0-7b46-85d6-4910-97c7231b0d05",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "itemType": "KustoDatabase"
+      },
+      "queryParameters": [],
+      "metadata": {
+        "workspaceId": "66503be7-cb73-4bf0-b14c-dfcdd90f8f13",
+        "measureName": "",
+        "querySetId": "231b0d05-97c7-4910-85d6-7b46bddc63a0",
+        "queryId": "66ddb5bf-0045-4f42-a382-74ee8ca8877f"
+      },
+      "parentContainer": {
+        "targetUniqueIdentifier": "e6971cb0-465a-4f2c-a49d-90de21f0ffc9"
+      }
+    },
+    "type": "kqlSource-v1"
+  },
+  {
+    "uniqueIdentifier": "d6047c7b-7026-4b74-ba46-30748247e2b7",
+    "payload": {
+      "name": "Injury event",
+      "parentContainer": {
+        "targetUniqueIdentifier": "e6971cb0-465a-4f2c-a49d-90de21f0ffc9"
+      },
+      "definition": {
+        "type": "Event",
+        "instance": "{\"templateId\":\"SourceEvent\",\"templateVersion\":\"1.1\",\"steps\":[{\"name\":\"SourceEventStep\",\"id\":\"2154532c-b508-4e15-bed1-f92c1e232755\",\"rows\":[{\"name\":\"SourceSelector\",\"kind\":\"SourceReference\",\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"a4600eea-c268-4854-b5e8-38d061fa27b7\"}]}]}]}"
+      }
+    },
+    "type": "timeSeriesView-v1"
+  },
+  {
+    "uniqueIdentifier": "7bf6943e-f313-4582-81d7-3ae95052596c",
+    "payload": {
+      "name": "Player",
+      "parentContainer": {
+        "targetUniqueIdentifier": "e6971cb0-465a-4f2c-a49d-90de21f0ffc9"
+      },
+      "definition": {
+        "type": "Object"
+      }
+    },
+    "type": "timeSeriesView-v1"
+  },
+  {
+    "uniqueIdentifier": "de87b320-5d8e-44c4-9370-37dbe437aec6",
+    "payload": {
+      "name": "Object ID",
+      "parentObject": {
+        "targetUniqueIdentifier": "7bf6943e-f313-4582-81d7-3ae95052596c"
+      },
+      "parentContainer": {
+        "targetUniqueIdentifier": "e6971cb0-465a-4f2c-a49d-90de21f0ffc9"
+      },
+      "definition": {
+        "type": "Attribute",
+        "instance": "{\"steps\":[{\"id\":\"83f9b56b-7cb0-4975-9b32-70c49282380b\",\"name\":\"IdPartStep\",\"rows\":[{\"arguments\":[{\"name\":\"op\",\"type\":\"string\",\"value\":\"Text\"},{\"name\":\"format\",\"type\":\"string\",\"value\":\"\"}],\"kind\":\"TypeAssertion\",\"name\":\"TypeAssertion\"}]}],\"templateId\":\"IdentityPartAttribute\",\"templateVersion\":\"1.2.3\"}"
+      }
+    },
+    "type": "timeSeriesView-v1"
+  },
+  {
+    "uniqueIdentifier": "c13c9697-5259-49e6-bc60-364a7bb9d66e",
+    "payload": {
+      "name": "PlayerName1",
+      "parentObject": {
+        "targetUniqueIdentifier": "7bf6943e-f313-4582-81d7-3ae95052596c"
+      },
+      "parentContainer": {
+        "targetUniqueIdentifier": "e6971cb0-465a-4f2c-a49d-90de21f0ffc9"
+      },
+      "definition": {
+        "type": "Attribute",
+        "instance": "{\"steps\":[{\"id\":\"5a78cc48-3440-4a8d-952d-e9b0755b3bdf\",\"name\":\"IdStructureStep\",\"rows\":[{\"arguments\":[{\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"de87b320-5d8e-44c4-9370-37dbe437aec6\"}],\"kind\":\"AttributeReference\",\"name\":\"idPart\",\"type\":\"complex\"}],\"kind\":\"IdPart\",\"name\":\"IdPart\"}]}],\"templateId\":\"IdentityTupleAttribute\",\"templateVersion\":\"1.2.3\"}"
+      }
+    },
+    "type": "timeSeriesView-v1"
+  },
+  {
+    "uniqueIdentifier": "1bee99f1-0f66-4b95-bc6c-d2247e0ca4cb",
+    "payload": {
+      "name": "Injury event",
+      "parentObject": {
+        "targetUniqueIdentifier": "7bf6943e-f313-4582-81d7-3ae95052596c"
+      },
+      "parentContainer": {
+        "targetUniqueIdentifier": "e6971cb0-465a-4f2c-a49d-90de21f0ffc9"
+      },
+      "definition": {
+        "type": "Event",
+        "instance": "{\"steps\":[{\"id\":\"a86cbe92-ae0f-4dc5-bb01-5ef1d4962f11\",\"name\":\"SplitEventStep\",\"rows\":[{\"arguments\":[{\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"d6047c7b-7026-4b74-ba46-30748247e2b7\"}],\"kind\":\"EventReference\",\"name\":\"event\",\"type\":\"complex\"}],\"kind\":\"Event\",\"name\":\"EventSelector\"},{\"arguments\":[{\"name\":\"fieldName\",\"type\":\"string\",\"value\":\"PlayerName1\"},{\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"de87b320-5d8e-44c4-9370-37dbe437aec6\"}],\"kind\":\"AttributeReference\",\"name\":\"idPart\",\"type\":\"complex\"}],\"kind\":\"FieldIdMapping\",\"name\":\"FieldIdMapping\"},{\"arguments\":[{\"name\":\"isAuthoritative\",\"type\":\"boolean\",\"value\":true}],\"kind\":\"EventOptions\",\"name\":\"SplitEventOptions\"}]}],\"templateId\":\"SplitEvent\",\"templateVersion\":\"1.2.3\"}"
+      }
+    },
+    "type": "timeSeriesView-v1"
+  },
+  {
+    "uniqueIdentifier": "afdd6ff8-9e43-4c11-ab53-a721c133fcb1",
+    "payload": {
+      "name": "PlayerName",
+      "parentObject": {
+        "targetUniqueIdentifier": "7bf6943e-f313-4582-81d7-3ae95052596c"
+      },
+      "parentContainer": {
+        "targetUniqueIdentifier": "e6971cb0-465a-4f2c-a49d-90de21f0ffc9"
+      },
+      "definition": {
+        "type": "Attribute",
+        "instance": "{\"steps\":[{\"id\":\"cdb868ac-fbf3-4704-bec3-81e4f9d42a27\",\"name\":\"EventSelectStep\",\"rows\":[{\"arguments\":[{\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"1bee99f1-0f66-4b95-bc6c-d2247e0ca4cb\"}],\"kind\":\"EventReference\",\"name\":\"event\",\"type\":\"complex\"}],\"kind\":\"Event\",\"name\":\"EventSelector\"},{\"arguments\":[{\"name\":\"fieldName\",\"type\":\"string\",\"value\":\"PlayerName\"}],\"kind\":\"EventField\",\"name\":\"EventFieldSelector\"}]},{\"id\":\"25db29ee-9f5d-4699-9fa6-20474801b9f2\",\"name\":\"EventComputeStep\",\"rows\":[{\"arguments\":[{\"name\":\"op\",\"type\":\"string\",\"value\":\"Text\"},{\"name\":\"format\",\"type\":\"string\",\"value\":\"\"}],\"kind\":\"TypeAssertion\",\"name\":\"TypeAssertion\"}]}],\"templateId\":\"BasicEventAttribute\",\"templateVersion\":\"1.2.3\"}"
+      }
+    },
+    "type": "timeSeriesView-v1"
+  },
+  {
+    "uniqueIdentifier": "a8fdfb5d-963b-4c0e-b5f0-86faea120ea1",
+    "payload": {
+      "name": "CurrentStatus",
+      "parentObject": {
+        "targetUniqueIdentifier": "7bf6943e-f313-4582-81d7-3ae95052596c"
+      },
+      "parentContainer": {
+        "targetUniqueIdentifier": "e6971cb0-465a-4f2c-a49d-90de21f0ffc9"
+      },
+      "definition": {
+        "type": "Attribute",
+        "instance": "{\"steps\":[{\"id\":\"6137b313-2aef-48ea-82f5-bb8bde66bef1\",\"name\":\"EventSelectStep\",\"rows\":[{\"arguments\":[{\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"1bee99f1-0f66-4b95-bc6c-d2247e0ca4cb\"}],\"kind\":\"EventReference\",\"name\":\"event\",\"type\":\"complex\"}],\"kind\":\"Event\",\"name\":\"EventSelector\"},{\"arguments\":[{\"name\":\"fieldName\",\"type\":\"string\",\"value\":\"CurrentStatus\"}],\"kind\":\"EventField\",\"name\":\"EventFieldSelector\"}]},{\"id\":\"75f4d66a-8563-431c-b5a5-038dc5d523aa\",\"name\":\"EventComputeStep\",\"rows\":[{\"arguments\":[{\"name\":\"op\",\"type\":\"string\",\"value\":\"Text\"},{\"name\":\"format\",\"type\":\"string\",\"value\":\"\"}],\"kind\":\"TypeAssertion\",\"name\":\"TypeAssertion\"}]}],\"templateId\":\"BasicEventAttribute\",\"templateVersion\":\"1.2.3\"}"
+      }
+    },
+    "type": "timeSeriesView-v1"
+  },
+  {
+    "uniqueIdentifier": "33cc4b71-db6d-4f7d-ae3d-a6318dfa3101",
+    "payload": {
+      "name": "Reason",
+      "parentObject": {
+        "targetUniqueIdentifier": "7bf6943e-f313-4582-81d7-3ae95052596c"
+      },
+      "parentContainer": {
+        "targetUniqueIdentifier": "e6971cb0-465a-4f2c-a49d-90de21f0ffc9"
+      },
+      "definition": {
+        "type": "Attribute",
+        "instance": "{\"steps\":[{\"id\":\"36ce19da-1d0f-4204-9dce-8bda31d4779b\",\"name\":\"EventSelectStep\",\"rows\":[{\"arguments\":[{\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"1bee99f1-0f66-4b95-bc6c-d2247e0ca4cb\"}],\"kind\":\"EventReference\",\"name\":\"event\",\"type\":\"complex\"}],\"kind\":\"Event\",\"name\":\"EventSelector\"},{\"arguments\":[{\"name\":\"fieldName\",\"type\":\"string\",\"value\":\"Reason\"}],\"kind\":\"EventField\",\"name\":\"EventFieldSelector\"}]},{\"id\":\"05838ce2-01c7-4b28-9835-add29f308826\",\"name\":\"EventComputeStep\",\"rows\":[{\"arguments\":[{\"name\":\"op\",\"type\":\"string\",\"value\":\"Text\"},{\"name\":\"format\",\"type\":\"string\",\"value\":\"\"}],\"kind\":\"TypeAssertion\",\"name\":\"TypeAssertion\"}]}],\"templateId\":\"BasicEventAttribute\",\"templateVersion\":\"1.2.3\"}"
+      }
+    },
+    "type": "timeSeriesView-v1"
+  },
+  {
+    "uniqueIdentifier": "548687f9-6d8c-4689-9ed6-e23b9057bc8c",
+    "payload": {
+      "name": "Team",
+      "parentObject": {
+        "targetUniqueIdentifier": "7bf6943e-f313-4582-81d7-3ae95052596c"
+      },
+      "parentContainer": {
+        "targetUniqueIdentifier": "e6971cb0-465a-4f2c-a49d-90de21f0ffc9"
+      },
+      "definition": {
+        "type": "Attribute",
+        "instance": "{\"steps\":[{\"id\":\"88d1f20c-2b8f-468e-a1a2-9f9eab06de97\",\"name\":\"EventSelectStep\",\"rows\":[{\"arguments\":[{\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"1bee99f1-0f66-4b95-bc6c-d2247e0ca4cb\"}],\"kind\":\"EventReference\",\"name\":\"event\",\"type\":\"complex\"}],\"kind\":\"Event\",\"name\":\"EventSelector\"},{\"arguments\":[{\"name\":\"fieldName\",\"type\":\"string\",\"value\":\"Team\"}],\"kind\":\"EventField\",\"name\":\"EventFieldSelector\"}]},{\"id\":\"a7212928-c6a2-4d0b-afc8-eaa408b764bd\",\"name\":\"EventComputeStep\",\"rows\":[{\"arguments\":[{\"name\":\"op\",\"type\":\"string\",\"value\":\"Text\"},{\"name\":\"format\",\"type\":\"string\",\"value\":\"\"}],\"kind\":\"TypeAssertion\",\"name\":\"TypeAssertion\"}]}],\"templateId\":\"BasicEventAttribute\",\"templateVersion\":\"1.2.3\"}"
+      }
+    },
+    "type": "timeSeriesView-v1"
+  },
+  {
+    "uniqueIdentifier": "a69f8cf4-ba72-43c8-9931-34856c6dfc07",
+    "payload": {
+      "name": "CurrentStatus alert",
+      "parentObject": {
+        "targetUniqueIdentifier": "7bf6943e-f313-4582-81d7-3ae95052596c"
+      },
+      "parentContainer": {
+        "targetUniqueIdentifier": "e6971cb0-465a-4f2c-a49d-90de21f0ffc9"
+      },
+      "definition": {
+        "type": "Rule",
+        "instance": "{\"steps\":[{\"id\":\"64277ee8-c554-42e0-9a3c-e1472c07e5af\",\"name\":\"ScalarSelectStep\",\"rows\":[{\"arguments\":[{\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"a8fdfb5d-963b-4c0e-b5f0-86faea120ea1\"}],\"kind\":\"AttributeReference\",\"name\":\"attribute\",\"type\":\"complex\"}],\"kind\":\"Attribute\",\"name\":\"AttributeSelector\"}]},{\"id\":\"ef93212c-b7b1-4975-85d1-9ca96494df34\",\"name\":\"ScalarDetectStep\",\"rows\":[{\"arguments\":[{\"name\":\"op\",\"type\":\"string\",\"value\":\"Changes\"}],\"kind\":\"AnyValueChange\",\"name\":\"AnyValueChange\"},{\"arguments\":[],\"kind\":\"EachTime\",\"name\":\"OccurrenceOption\"}]},{\"id\":\"f35ec82a-afb1-4c75-a3fe-e116464fa904\",\"name\":\"ActStep\",\"rows\":[{\"arguments\":[{\"name\":\"messageLocale\",\"type\":\"string\",\"value\":\"en-us\"},{\"name\":\"sentTo\",\"type\":\"array\",\"values\":[{\"type\":\"string\",\"value\":\"user@mertg269hotmail.onmicrosoft.com\"}]},{\"name\":\"copyTo\",\"type\":\"array\",\"values\":[]},{\"name\":\"bCCTo\",\"type\":\"array\",\"values\":[]},{\"name\":\"subject\",\"type\":\"array\",\"values\":[{\"name\":\"string\",\"type\":\"string\",\"value\":\"​\"},{\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"afdd6ff8-9e43-4c11-ab53-a721c133fcb1\"}],\"kind\":\"AttributeReference\",\"type\":\"complex\"},{\"name\":\"string\",\"type\":\"string\",\"value\":\" is \"},{\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"a8fdfb5d-963b-4c0e-b5f0-86faea120ea1\"}],\"kind\":\"AttributeReference\",\"type\":\"complex\"},{\"name\":\"string\",\"type\":\"string\",\"value\":\" \"}]},{\"name\":\"headline\",\"type\":\"array\",\"values\":[{\"name\":\"string\",\"type\":\"string\",\"value\":\"​ \"},{\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"afdd6ff8-9e43-4c11-ab53-a721c133fcb1\"}],\"kind\":\"AttributeReference\",\"type\":\"complex\"},{\"name\":\"string\",\"type\":\"string\",\"value\":\"'s \"},{\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"33cc4b71-db6d-4f7d-ae3d-a6318dfa3101\"}],\"kind\":\"AttributeReference\",\"type\":\"complex\"},{\"name\":\"string\",\"type\":\"string\",\"value\":\" injury status changed to \"},{\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"a8fdfb5d-963b-4c0e-b5f0-86faea120ea1\"}],\"kind\":\"AttributeReference\",\"type\":\"complex\"},{\"name\":\"string\",\"type\":\"string\",\"value\":\" \"}]},{\"name\":\"optionalMessage\",\"type\":\"array\",\"values\":[{\"type\":\"string\",\"value\":\"\"}]},{\"name\":\"additionalInformation\",\"type\":\"array\",\"values\":[{\"arguments\":[{\"name\":\"name\",\"type\":\"string\",\"value\":\"PlayerName\"},{\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"afdd6ff8-9e43-4c11-ab53-a721c133fcb1\"}],\"kind\":\"AttributeReference\",\"name\":\"reference\",\"type\":\"complexReference\"}],\"kind\":\"NameReferencePair\",\"type\":\"complex\"},{\"arguments\":[{\"name\":\"name\",\"type\":\"string\",\"value\":\"CurrentStatus\"},{\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"a8fdfb5d-963b-4c0e-b5f0-86faea120ea1\"}],\"kind\":\"AttributeReference\",\"name\":\"reference\",\"type\":\"complexReference\"}],\"kind\":\"NameReferencePair\",\"type\":\"complex\"},{\"arguments\":[{\"name\":\"name\",\"type\":\"string\",\"value\":\"Reason\"},{\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"33cc4b71-db6d-4f7d-ae3d-a6318dfa3101\"}],\"kind\":\"AttributeReference\",\"name\":\"reference\",\"type\":\"complexReference\"}],\"kind\":\"NameReferencePair\",\"type\":\"complex\"},{\"arguments\":[{\"name\":\"name\",\"type\":\"string\",\"value\":\"Team\"},{\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"548687f9-6d8c-4689-9ed6-e23b9057bc8c\"}],\"kind\":\"AttributeReference\",\"name\":\"reference\",\"type\":\"complexReference\"}],\"kind\":\"NameReferencePair\",\"type\":\"complex\"}]}],\"kind\":\"EmailMessage\",\"name\":\"EmailBinding\"}]}],\"templateId\":\"AttributeTrigger\",\"templateVersion\":\"1.2.3\"}",
+        "settings": {
+          "shouldRun": true,
+          "shouldApplyRuleOnUpdate": true
+        }
+      }
+    },
+    "type": "timeSeriesView-v1"
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Reflex",
+    "displayName": "Injury Tracker of My Players"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "eb1e5d39-b547-a04c-4481-8c2683366779"
+  }
+}

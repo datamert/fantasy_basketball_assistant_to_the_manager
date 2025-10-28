@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Eventstream",
+    "displayName": "NBA_Injury_Reports"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "2807bd42-adfc-9e6b-4ee1-e986ad7710ba"
+  }
+}

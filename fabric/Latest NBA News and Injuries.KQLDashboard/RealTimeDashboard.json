@@ -1,0 +1,35 @@
+{
+  "autoRefresh": {
+    "enabled": false
+  },
+  "baseQueries": [],
+  "tiles": [],
+  "dataSources": [],
+  "pages": [
+    {
+      "name": "Page 1",
+      "id": "b63a78b0-d8c1-4a65-8331-2a2b93cc48cf"
+    }
+  ],
+  "parameters": [
+    {
+      "kind": "duration",
+      "id": "f171e4f4-cb64-4aca-93d8-1beb16a2f40c",
+      "displayName": "Time range",
+      "description": "",
+      "beginVariableName": "_startTime",
+      "endVariableName": "_endTime",
+      "defaultValue": {
+        "kind": "dynamic",
+        "count": 1,
+        "unit": "hours"
+      },
+      "showOnPages": {
+        "kind": "all"
+      }
+    }
+  ],
+  "queries": [],
+  "schema_version": 65,
+  "title": "Latest NBA News and Injuries"
+}

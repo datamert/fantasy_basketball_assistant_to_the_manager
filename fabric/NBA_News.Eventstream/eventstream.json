@@ -2,7 +2,7 @@
   "sources": [
     {
       "id": "82995e68-b624-4939-9f88-cbf239beac75",
-      "name": "CustomEndpoint-Source",
+      "name": "NBA-News-Google-Job",
       "type": "CustomEndpoint",
       "properties": {}
     }
@@ -85,7 +85,7 @@
       "properties": {},
       "inputNodes": [
         {
-          "name": "CustomEndpoint-Source"
+          "name": "NBA-News-Google-Job"
         }
       ]
     }

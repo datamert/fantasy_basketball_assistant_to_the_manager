@@ -1,0 +1,22 @@
+{
+  "queryset": {
+    "version": "1.0.0",
+    "dataSources": [
+      {
+        "id": "feac1dff-ee89-408d-a908-61633902f3f2",
+        "clusterUri": "https://trd-tmc5hqu3akwr7xcrwd.z5.kusto.fabric.microsoft.com",
+        "type": "Fabric",
+        "databaseItemId": "231b0d05-97c7-4910-85d6-7b46bddc63a0",
+        "databaseItemName": "Injury"
+      }
+    ],
+    "tabs": [
+      {
+        "id": "66ddb5bf-0045-4f42-a382-74ee8ca8877f",
+        "content": "nba_injury_reports_latest\n| join kind=inner (external_table(\"players_to_track_injuries\")) on $left.PlayerName == $right.PlayerName\n| project PlayerName, CurrentStatus, Reason, Team, GameDate, PlayerName1\n| summarize arg_max(GameDate, *) by PlayerName",
+        "title": "Activator Source",
+        "dataSourceId": "feac1dff-ee89-408d-a908-61633902f3f2"
+      }
+    ]
+  }
+}

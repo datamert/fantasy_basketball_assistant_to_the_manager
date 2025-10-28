@@ -1,0 +1,322 @@
+{
+  "sources": [
+    {
+      "id": "2f304217-273c-4605-9630-b115969b7ea0",
+      "name": "NBA-Injury-Google-Job",
+      "type": "CustomEndpoint",
+      "properties": {}
+    }
+  ],
+  "destinations": [
+    {
+      "id": "6f8ed185-c660-4aee-baeb-c5cb5529dbb1",
+      "name": "Eventhouse",
+      "type": "Eventhouse",
+      "properties": {
+        "dataIngestionMode": "ProcessedIngestion",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "itemId": "bddc63a0-7b46-85d6-4910-97c7231b0d05",
+        "databaseName": "Injury",
+        "tableName": "nba_injury_reports_raw",
+        "inputSerialization": {
+          "type": "Json",
+          "properties": {
+            "encoding": "UTF8"
+          }
+        }
+      },
+      "inputNodes": [
+        {
+          "name": "Rename_without_spaces"
+        }
+      ],
+      "inputSchemas": [
+        {
+          "name": "Rename_without_spaces",
+          "schema": {
+            "columns": [
+              {
+                "name": "GameDate",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "GameTime",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "Matchup",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "Team",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "PlayerName",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "CurrentStatus",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "Reason",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "EventProcessedUtcTime",
+                "type": "DateTime",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "PartitionId",
+                "type": "BigInt",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "EventEnqueuedUtcTime",
+                "type": "DateTime",
+                "fields": null,
+                "items": null
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "streams": [
+    {
+      "id": "8123e384-2cda-486c-8478-41beeefa592b",
+      "name": "NBAInjuryReports-stream",
+      "type": "DefaultStream",
+      "properties": {},
+      "inputNodes": [
+        {
+          "name": "NBA-Injury-Google-Job"
+        }
+      ]
+    }
+  ],
+  "operators": [
+    {
+      "name": "Rename_without_spaces",
+      "type": "ManageFields",
+      "inputNodes": [
+        {
+          "name": "NBAInjuryReports-stream"
+        }
+      ],
+      "properties": {
+        "columns": [
+          {
+            "type": "Rename",
+            "properties": {
+              "column": {
+                "expressionType": "ColumnReference",
+                "node": null,
+                "columnName": "Game Date",
+                "columnPathSegments": []
+              }
+            },
+            "alias": "GameDate"
+          },
+          {
+            "type": "Rename",
+            "properties": {
+              "column": {
+                "expressionType": "ColumnReference",
+                "node": null,
+                "columnName": "Game Time",
+                "columnPathSegments": []
+              }
+            },
+            "alias": "GameTime"
+          },
+          {
+            "type": "Rename",
+            "properties": {
+              "column": {
+                "expressionType": "ColumnReference",
+                "node": null,
+                "columnName": "Matchup",
+                "columnPathSegments": []
+              }
+            },
+            "alias": "Matchup"
+          },
+          {
+            "type": "Rename",
+            "properties": {
+              "column": {
+                "expressionType": "ColumnReference",
+                "node": null,
+                "columnName": "Team",
+                "columnPathSegments": []
+              }
+            },
+            "alias": "Team"
+          },
+          {
+            "type": "Rename",
+            "properties": {
+              "column": {
+                "expressionType": "ColumnReference",
+                "node": null,
+                "columnName": "Player Name",
+                "columnPathSegments": []
+              }
+            },
+            "alias": "PlayerName"
+          },
+          {
+            "type": "Rename",
+            "properties": {
+              "column": {
+                "expressionType": "ColumnReference",
+                "node": null,
+                "columnName": "Current Status",
+                "columnPathSegments": []
+              }
+            },
+            "alias": "CurrentStatus"
+          },
+          {
+            "type": "Rename",
+            "properties": {
+              "column": {
+                "expressionType": "ColumnReference",
+                "node": null,
+                "columnName": "Reason",
+                "columnPathSegments": []
+              }
+            },
+            "alias": "Reason"
+          },
+          {
+            "type": "Rename",
+            "properties": {
+              "column": {
+                "expressionType": "ColumnReference",
+                "node": null,
+                "columnName": "EventProcessedUtcTime",
+                "columnPathSegments": []
+              }
+            },
+            "alias": "EventProcessedUtcTime"
+          },
+          {
+            "type": "Rename",
+            "properties": {
+              "column": {
+                "expressionType": "ColumnReference",
+                "node": null,
+                "columnName": "PartitionId",
+                "columnPathSegments": []
+              }
+            },
+            "alias": "PartitionId"
+          },
+          {
+            "type": "Rename",
+            "properties": {
+              "column": {
+                "expressionType": "ColumnReference",
+                "node": null,
+                "columnName": "EventEnqueuedUtcTime",
+                "columnPathSegments": []
+              }
+            },
+            "alias": "EventEnqueuedUtcTime"
+          }
+        ]
+      },
+      "inputSchemas": [
+        {
+          "name": "NBAInjuryReports-stream",
+          "schema": {
+            "columns": [
+              {
+                "name": "Game Date",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "Game Time",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "Matchup",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "Team",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "Player Name",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "Current Status",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "Reason",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "EventProcessedUtcTime",
+                "type": "DateTime",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "PartitionId",
+                "type": "BigInt",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "EventEnqueuedUtcTime",
+                "type": "DateTime",
+                "fields": null,
+                "items": null
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "compatibilityLevel": "1.1"
+}

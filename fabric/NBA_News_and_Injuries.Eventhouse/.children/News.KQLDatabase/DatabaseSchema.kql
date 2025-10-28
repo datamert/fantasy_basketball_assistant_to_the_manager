@@ -3,3 +3,5 @@
 
 
 .create-merge table nba_news_raw (['title']:string, url:string, source:string, EventProcessedUtcTime:datetime, PartitionId:long, EventEnqueuedUtcTime:datetime) 
+.create-or-alter materialized-view with (Lookback = time(7.00:00:00), lookback_column = "EventEnqueuedUtcTime")  nba_news_latest on table nba_news_raw { nba_news_raw
+  | summarize arg_max(EventEnqueuedUtcTime, *) by url }

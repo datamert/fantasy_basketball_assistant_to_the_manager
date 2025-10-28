@@ -1,0 +1,27 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "List of Players for Injury Tracking",
+  "queryGroups": [],
+  "documentLocale": "en-GB",
+  "queriesMetadata": {
+    "players_injury_tracking": {
+      "queryId": "cb82b6f3-6472-4e8f-b468-1ebd6f87ea82",
+      "queryName": "players_injury_tracking",
+      "loadEnabled": false
+    },
+    "players_injury_tracking_DataDestination": {
+      "queryId": "8c2996fc-3740-4a71-8b77-721c1aaf8a4a",
+      "queryName": "players_injury_tracking_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"2705dbcf-1b07-46cc-8b2f-79cf5eabee7a\",\"DatasourceId\":\"e86d0d50-074b-4ce9-a7a2-e12c4215e85c\"}"
+    }
+  ]
+}

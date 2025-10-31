@@ -1,0 +1,7 @@
+numpy
+pandas
+pyarrow
+nba_api
+azure-identity
+azure-storage-file-datalake
+requests

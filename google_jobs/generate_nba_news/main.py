@@ -2,11 +2,12 @@
 import os, sys
 print("CONTAINER STARTUP pid", os.getpid(), "cwd", os.getcwd(), flush=True)
 from azure.eventhub import EventHubProducerClient, EventData
-import requests
+import feedparser
 
 # Config from env
 FABRIC_EVENSTREAM_CONN_STR = os.environ["FABRIC_EVENSTREAM_CONN_STR_2"]
 FABRIC_EVENSTREAM_NAME = os.environ["FABRIC_EVENSTREAM_NAME_2"]
+ARTICLE_LIMIT = int(os.environ.get("ARTICLE_LIMIT", "15"))
 
 # Create producer client
 producer = EventHubProducerClient.from_connection_string(
@@ -14,16 +15,23 @@ producer = EventHubProducerClient.from_connection_string(
     eventhub_name=FABRIC_EVENSTREAM_NAME
 )
 
-def get_new_espn_articles():
-    url = "https://nba-stories.onrender.com/articles?source=espn"
-    response = requests.get(url)
-    response.raise_for_status()
-    articles = response.json()
+def fetch_espn_nba_rss(limit):
+    feed_url = "https://www.espn.com/espn/rss/nba/news"
+    feed = feedparser.parse(feed_url)
+
+    articles = []
+    for entry in feed.entries[:limit]:
+        articles.append({
+            "title": entry.title,
+            "url": entry.link,
+            "source": "espn"
+        })
+
     return articles
 
 def run():
     # Step 1: Query news articles
-    articles = get_new_espn_articles()
+    articles = fetch_espn_nba_rss(ARTICLE_LIMIT)
 
     # Step 2: Create batch and add each event
     event_data_batch = producer.create_batch()

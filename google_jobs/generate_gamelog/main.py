@@ -52,6 +52,9 @@ def run():
         if CREATE_TABLE:
             client.create_table(schema_name=FABRIC_SCHEMA, table_name=FABRIC_TABLE, key_cols=["PLAYER_ID", "GAME_ID"])
         
+        # Enforce PLAYER_ID as long
+        df["PLAYER_ID"] = pd.to_numeric(df["PLAYER_ID"], downcast="integer").astype("Int64")
+
         # Write parquet to Fabric
         with tempfile.TemporaryDirectory() as td:
             local_file = os.path.join(td, f"{FABRIC_TABLE}.parquet")

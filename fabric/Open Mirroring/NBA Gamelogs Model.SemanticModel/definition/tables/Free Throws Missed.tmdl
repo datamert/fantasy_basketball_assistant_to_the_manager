@@ -1,0 +1,32 @@
+table 'Free Throws Missed'
+	isHidden
+	lineageTag: a784d5fa-b030-4a33-a247-4367859d19f6
+
+	measure 'Free Throws Missed Value' = SELECTEDVALUE('Free Throws Missed'[Free Throws Missed], 0)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		isHidden
+		lineageTag: d65cb5b3-6fab-41d3-91f4-5b088c07edbb
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Free Throws Missed'
+		isHidden
+		lineageTag: 5217ee5f-d2fe-400a-b137-128daa481176
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Free Throws Missed' = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(-5), CURRENCY(5), CURRENCY(0.25))
+
+	annotation PBI_Id = 61e6cee38ea44dad9320b858f121da40
+

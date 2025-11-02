@@ -1,12 +1,11 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
-    "type": "Notebook",
-    "displayName": "Notebook 2",
-    "description": "New notebook"
+    "type": "Report",
+    "displayName": "NBA Player Gamelog Analysis"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "3a6d00d0-9e29-bc41-4c41-31defcdcd000"
+    "logicalId": "f0a94e8c-f63f-8238-4124-4b413ee29ac0"
   }
 }

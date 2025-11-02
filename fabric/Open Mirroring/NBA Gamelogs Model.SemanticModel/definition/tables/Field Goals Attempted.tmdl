@@ -1,0 +1,32 @@
+table 'Field Goals Attempted'
+	isHidden
+	lineageTag: 2aa16ef5-5f13-4067-8f2b-90b960a4091d
+
+	measure 'Field Goals Attempted Value' = SELECTEDVALUE('Field Goals Attempted'[Field Goals Attempted], 0)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		isHidden
+		lineageTag: 7c07db27-af54-4a5d-94f8-57e3bbecc737
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Field Goals Attempted'
+		isHidden
+		lineageTag: d1c16002-a7a0-4969-a686-f1376ee63714
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Field Goals Attempted' = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(-5), CURRENCY(5), CURRENCY(0.25))
+
+	annotation PBI_Id = 69389dd752da44fc9bbade51c03b5f5b
+

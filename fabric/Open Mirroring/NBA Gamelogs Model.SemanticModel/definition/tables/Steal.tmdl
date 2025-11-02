@@ -1,0 +1,32 @@
+table Steal
+	isHidden
+	lineageTag: e8c5d295-dfbe-4475-92d7-20a020501a0a
+
+	measure 'Steal Value' = SELECTEDVALUE('Steal'[Steal], 2)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		isHidden
+		lineageTag: 6954d1a9-c871-4ed9-89ca-b827fb0884bb
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column Steal
+		isHidden
+		lineageTag: 8e0333df-0be8-431b-b3ff-ae1346d8ff37
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Steal = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(-5), CURRENCY(5), CURRENCY(0.25))
+
+	annotation PBI_Id = 8f8fad05e24647aead53c94bceb2859a
+

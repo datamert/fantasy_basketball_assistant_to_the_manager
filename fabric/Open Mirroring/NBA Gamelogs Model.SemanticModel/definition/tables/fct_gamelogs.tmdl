@@ -1,0 +1,358 @@
+table fct_gamelogs
+	lineageTag: cfe5cd70-b819-4eea-a67c-8bec181618ae
+	sourceLineageTag: [semantic].[fct_gamelogs]
+
+	measure FPTS =
+			CALCULATE(COUNTROWS(fct_gamelogs), fct_gamelogs[AST] >= 15) * '15+ Assists Bonus'[15+ Assists Bonus Value]
+			+ SUM(fct_gamelogs[FG3A]) * '3-point Shots Attempted'[3-point Shots Attempted Value]
+			+ SUM(fct_gamelogs[FG3M]) * '3-point Shots Made'[3-point Shots Made Value]
+			+ (SUM(fct_gamelogs[FG3A]) - SUM(fct_gamelogs[FG3M])) * '3-point Shots Missed'[3-point Shots Missed Value]
+			+ CALCULATE(COUNTROWS(fct_gamelogs), fct_gamelogs[REB] >= 20) * '20+ Rebounds Bonus'[20+ Rebounds Bonus Value]
+			+ CALCULATE(COUNTROWS(fct_gamelogs), fct_gamelogs[PTS] >= 40) * '40+ Points Bonus'[40+ Points Bonus Value]
+			+ CALCULATE(COUNTROWS(fct_gamelogs), fct_gamelogs[PTS] >= 50) * '50+ Points Bonus'[50+ Points Bonus Value]
+			+ SUM(fct_gamelogs[AST]) * Assist[Assist Value]
+			+ SUM(fct_gamelogs[BLK]) * Block[Block Value]
+			+ SUM(fct_gamelogs[DREB]) * 'Defensive Rebound'[Defensive Rebound Value]
+			+ SUM(fct_gamelogs[DD2]) * 'Double-Double'[Double-Double Value]
+			+ SUM(fct_gamelogs[FGA]) * 'Field Goals Attempted'[Field Goals Attempted Value]
+			+ SUM(fct_gamelogs[FGM]) * 'Field Goals Made'[Field Goals Made Value]
+			//+ _ * 'Flagrant Foul'[Flagrant Foul Value]
+			+ SUM(fct_gamelogs[FTA]) * 'Free Throws Attempted'[Free Throws Attempted Value]
+			+ SUM(fct_gamelogs[FTM]) * 'Free Throws Made'[Free Throws Made Value]
+			+ (SUM(fct_gamelogs[FTA]) - SUM(fct_gamelogs[FTM])) * 'Free Throws Missed'[Free Throws Missed Value]
+			+ SUM(fct_gamelogs[OREB]) * 'Offensive Rebound'[Offensive Rebound Value]
+			+ SUM(fct_gamelogs[PF]) * 'Personal Foul'[Personal Foul Value]
+			+ SUM('Plus/minus'[Plus/minus]) * 'Plus/minus'[Plus/minus Value]
+			+ SUM(fct_gamelogs[PTS]) * 'Points Scored'[Points Scored Value]
+			+ SUM(fct_gamelogs[REB]) * Rebound[Rebound Value]
+			+ SUM(fct_gamelogs[STL]) * Steal[Steal Value]
+			//+ _ * 'Technical Foul'[Technical Foul Value]
+			+ SUM(fct_gamelogs[TD3]) * 'Triple-Double'[Triple-Double Value]
+			+ SUM(Turnover[Turnover]) * Turnover[Turnover Value]
+		lineageTag: 2c5ca93f-d605-4f09-b844-1dcda24277bb
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'FPTS AVG' = DIVIDE([FPTS], [GP])
+		lineageTag: 700fcd3b-8106-44c0-b61a-fb38f425a12d
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure GP = COUNTROWS(fct_gamelogs)
+		formatString: 0
+		lineageTag: 17309e81-7193-4d54-a13d-0eafb1bb5f0c
+
+		changedProperty = Name
+
+	column DD2
+		dataType: int64
+		formatString: 0
+		lineageTag: d1aece74-97c4-4714-a196-2a4fd34fdfea
+		sourceLineageTag: DD2
+		summarizeBy: sum
+		sourceColumn: DD2
+
+		annotation SummarizationSetBy = Automatic
+
+	column TD3
+		dataType: int64
+		formatString: 0
+		lineageTag: 5039dbba-3b5a-484c-bbee-dc63a8eb3785
+		sourceLineageTag: TD3
+		summarizeBy: sum
+		sourceColumn: TD3
+
+		annotation SummarizationSetBy = Automatic
+
+	column BLK
+		dataType: int64
+		formatString: 0
+		lineageTag: e9a8da10-6eea-48be-a505-15241a9015d8
+		sourceLineageTag: BLK
+		summarizeBy: sum
+		sourceColumn: BLK
+
+		annotation SummarizationSetBy = Automatic
+
+	column BLKA
+		dataType: int64
+		formatString: 0
+		lineageTag: b969b57c-3065-4477-8f2d-0ee2b348b544
+		sourceLineageTag: BLKA
+		summarizeBy: sum
+		sourceColumn: BLKA
+
+		annotation SummarizationSetBy = Automatic
+
+	column PF
+		dataType: int64
+		formatString: 0
+		lineageTag: 1995db2b-4914-4bff-88a2-6b43c29f1c10
+		sourceLineageTag: PF
+		summarizeBy: sum
+		sourceColumn: PF
+
+		annotation SummarizationSetBy = Automatic
+
+	column PFD
+		dataType: int64
+		formatString: 0
+		lineageTag: a6e8c7fe-dda4-4eb8-a931-e6fd67c993fb
+		sourceLineageTag: PFD
+		summarizeBy: sum
+		sourceColumn: PFD
+
+		annotation SummarizationSetBy = Automatic
+
+	column PTS
+		dataType: int64
+		formatString: 0
+		lineageTag: 52def601-32ec-4cc0-8411-a31a1bc4e2a7
+		sourceLineageTag: PTS
+		summarizeBy: sum
+		sourceColumn: PTS
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLUS_MINUS
+		dataType: int64
+		formatString: 0
+		lineageTag: 1eb6c82c-dfcb-446f-bc04-e6f58abe0e03
+		sourceLineageTag: PLUS_MINUS
+		summarizeBy: sum
+		sourceColumn: PLUS_MINUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column OREB
+		dataType: int64
+		formatString: 0
+		lineageTag: 26cb4dd7-d320-4546-bde1-b99dd824cb80
+		sourceLineageTag: OREB
+		summarizeBy: sum
+		sourceColumn: OREB
+
+		annotation SummarizationSetBy = Automatic
+
+	column DREB
+		dataType: int64
+		formatString: 0
+		lineageTag: 11c0e20a-a9dc-423a-bd2a-81c411528b68
+		sourceLineageTag: DREB
+		summarizeBy: sum
+		sourceColumn: DREB
+
+		annotation SummarizationSetBy = Automatic
+
+	column REB
+		dataType: int64
+		formatString: 0
+		lineageTag: 89c4ce04-fae2-4632-bff7-6dafaf7a60c5
+		sourceLineageTag: REB
+		summarizeBy: sum
+		sourceColumn: REB
+
+		annotation SummarizationSetBy = Automatic
+
+	column AST
+		dataType: int64
+		formatString: 0
+		lineageTag: 1a4739c1-c932-4c36-941b-50d7c43ea5cb
+		sourceLineageTag: AST
+		summarizeBy: sum
+		sourceColumn: AST
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOV
+		dataType: int64
+		formatString: 0
+		lineageTag: 48c1976d-e33a-44ae-ad87-2b5098695962
+		sourceLineageTag: TOV
+		summarizeBy: sum
+		sourceColumn: TOV
+
+		annotation SummarizationSetBy = Automatic
+
+	column STL
+		dataType: int64
+		formatString: 0
+		lineageTag: f6118b87-40bf-42f5-ab9e-95a08a102b10
+		sourceLineageTag: STL
+		summarizeBy: sum
+		sourceColumn: STL
+
+		annotation SummarizationSetBy = Automatic
+
+	column FG3M
+		dataType: int64
+		formatString: 0
+		lineageTag: af36290b-1afe-4077-932d-ab0814120a3e
+		sourceLineageTag: FG3M
+		summarizeBy: sum
+		sourceColumn: FG3M
+
+		annotation SummarizationSetBy = Automatic
+
+	column FG3A
+		dataType: int64
+		formatString: 0
+		lineageTag: f5a11ea3-2081-4f8a-b22f-3117f687bda5
+		sourceLineageTag: FG3A
+		summarizeBy: sum
+		sourceColumn: FG3A
+
+		annotation SummarizationSetBy = Automatic
+
+	column FG3_PCT
+		dataType: double
+		lineageTag: e666fb93-3de6-4fb7-b927-0a77f67f42cf
+		sourceLineageTag: FG3_PCT
+		summarizeBy: sum
+		sourceColumn: FG3_PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FTM
+		dataType: int64
+		formatString: 0
+		lineageTag: d6995855-4b18-4038-b7cf-2c02234cc920
+		sourceLineageTag: FTM
+		summarizeBy: sum
+		sourceColumn: FTM
+
+		annotation SummarizationSetBy = Automatic
+
+	column FTA
+		dataType: int64
+		formatString: 0
+		lineageTag: 83b7dea8-430d-467a-a710-2233f14e880e
+		sourceLineageTag: FTA
+		summarizeBy: sum
+		sourceColumn: FTA
+
+		annotation SummarizationSetBy = Automatic
+
+	column FT_PCT
+		dataType: double
+		lineageTag: 61006b17-7149-4665-a27d-cf61df4573cb
+		sourceLineageTag: FT_PCT
+		summarizeBy: sum
+		sourceColumn: FT_PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Matchup
+		dataType: string
+		lineageTag: 22d83f9c-0631-4ef6-9362-3f8b53e1fcdb
+		sourceLineageTag: Matchup
+		summarizeBy: none
+		sourceColumn: Matchup
+
+		annotation SummarizationSetBy = Automatic
+
+	column WL
+		dataType: string
+		lineageTag: 83249132-2738-42a4-921a-bdc4c14676fd
+		sourceLineageTag: WL
+		summarizeBy: none
+		sourceColumn: WL
+
+		annotation SummarizationSetBy = Automatic
+
+	column MIN
+		dataType: double
+		lineageTag: 5ee43b79-ba93-46d0-9e39-0c1b75e1483b
+		sourceLineageTag: MIN
+		summarizeBy: sum
+		sourceColumn: MIN
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FGM
+		dataType: int64
+		formatString: 0
+		lineageTag: c152b41b-7b0c-4ad6-a3c0-eab4b2d63e93
+		sourceLineageTag: FGM
+		summarizeBy: sum
+		sourceColumn: FGM
+
+		annotation SummarizationSetBy = Automatic
+
+	column FGA
+		dataType: int64
+		formatString: 0
+		lineageTag: 114299f7-9d87-4fc6-9184-38240d4ed58a
+		sourceLineageTag: FGA
+		summarizeBy: sum
+		sourceColumn: FGA
+
+		annotation SummarizationSetBy = Automatic
+
+	column FG_PCT
+		dataType: double
+		lineageTag: 4571b59b-fa6a-4e2e-af15-018119b5395a
+		sourceLineageTag: FG_PCT
+		summarizeBy: sum
+		sourceColumn: FG_PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Player ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: 4a7b58ce-b740-4ef2-83d9-8640a7bdf8a6
+		sourceLineageTag: Player ID
+		summarizeBy: none
+		sourceColumn: Player ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Team ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: 8240bc69-c2bf-4ce0-8d75-f04c7c65d4a1
+		sourceLineageTag: Team ID
+		summarizeBy: none
+		sourceColumn: Team ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Game ID'
+		dataType: string
+		lineageTag: 40c61fe2-229c-4c87-ad5d-3a863c8e1950
+		sourceLineageTag: Game ID
+		summarizeBy: none
+		sourceColumn: Game ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Game Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: da243530-fef0-4aa4-9072-2b35366f1143
+		sourceLineageTag: Game Date
+		summarizeBy: none
+		sourceColumn: Game Date
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fct_gamelogs = entity
+		mode: directLake
+		source
+			entityName: fct_gamelogs
+			schemaName: semantic
+			expressionSource: 'DirectLake - NBA_Data'
+

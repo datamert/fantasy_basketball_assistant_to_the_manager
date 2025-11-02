@@ -1,0 +1,32 @@
+table '20+ Rebounds Bonus'
+	isHidden
+	lineageTag: 0f376d41-06fa-4823-a5cb-8871c6cb2c1d
+
+	measure '20+ Rebounds Bonus Value' = SELECTEDVALUE('20+ Rebounds Bonus'[20+ Rebounds Bonus], 0)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		isHidden
+		lineageTag: 2838a462-8c49-47a1-b2da-a8e1d80758c2
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column '20+ Rebounds Bonus'
+		isHidden
+		lineageTag: 7e99a781-45d5-41f0-8955-44a021508ace
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition '20+ Rebounds Bonus' = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(-5), CURRENCY(5), CURRENCY(0.25))
+
+	annotation PBI_Id = 5673c1a546474b0b933433a1bc7096ce
+

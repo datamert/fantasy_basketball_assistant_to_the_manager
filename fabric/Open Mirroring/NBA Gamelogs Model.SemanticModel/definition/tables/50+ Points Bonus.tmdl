@@ -1,0 +1,32 @@
+table '50+ Points Bonus'
+	isHidden
+	lineageTag: 0602437a-e5a7-4e0e-8b48-1743be516928
+
+	measure '50+ Points Bonus Value' = SELECTEDVALUE('50+ Points Bonus'[50+ Points Bonus], 2)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		isHidden
+		lineageTag: fa2f998f-1aec-4c96-8842-aaf8ebfac3b5
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column '50+ Points Bonus'
+		isHidden
+		lineageTag: 6b3a5301-e39c-435d-9d17-c30ea4de099d
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition '50+ Points Bonus' = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(-5), CURRENCY(5), CURRENCY(0.25))
+
+	annotation PBI_Id = af7510c8846643b0b4d10bbe894c4f51
+

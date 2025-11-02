@@ -1,0 +1,32 @@
+table Turnover
+	isHidden
+	lineageTag: 1bb536de-354b-484e-8838-e06a41d38ac2
+
+	measure 'Turnover Value' = SELECTEDVALUE('Turnover'[Turnover], -1)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		isHidden
+		lineageTag: d784a58b-e604-431f-9df6-d0daa1d787ab
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column Turnover
+		isHidden
+		lineageTag: 776a80c7-8b93-4de0-b2c6-9f3b7a1210ff
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Turnover = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(-5), CURRENCY(5), CURRENCY(0.25))
+
+	annotation PBI_Id = bc10c7652e1f40bdb83f8cb933a69304
+

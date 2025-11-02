@@ -1,0 +1,30 @@
+table dim_game_date
+	lineageTag: 6efcbe11-5717-481f-be8b-e0a1c5f15087
+	sourceLineageTag: [semantic].[dim_game_date]
+
+	column 'Season Year'
+		dataType: string
+		lineageTag: 29f159dd-be3f-4633-b1b2-5b396a4176c4
+		sourceLineageTag: Season Year
+		summarizeBy: none
+		sourceColumn: Season Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Game Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4c6a2b3b-ee83-46fa-b333-e334e32a4af9
+		sourceLineageTag: Game Date
+		summarizeBy: none
+		sourceColumn: Game Date
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_game_date = entity
+		mode: directLake
+		source
+			entityName: dim_game_date
+			schemaName: semantic
+			expressionSource: 'DirectLake - NBA_Data'
+

@@ -1,0 +1,32 @@
+table 'Offensive Rebound'
+	isHidden
+	lineageTag: bc64392d-4954-4e6e-b773-874189754d00
+
+	measure 'Offensive Rebound Value' = SELECTEDVALUE('Offensive Rebound'[Offensive Rebound], 1)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		isHidden
+		lineageTag: a81c9aab-8022-4480-8f7e-ec344b988f1b
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Offensive Rebound'
+		isHidden
+		lineageTag: 63195170-664d-4ebe-9c82-8846960825e9
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Offensive Rebound' = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(-5), CURRENCY(5), CURRENCY(0.25))
+
+	annotation PBI_Id = 4327c5301f3f45c8868c8a3255e63885
+

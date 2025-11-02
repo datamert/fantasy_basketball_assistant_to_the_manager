@@ -1,0 +1,32 @@
+table Rebound
+	isHidden
+	lineageTag: 60321f84-29de-4faa-85ed-8a782ba75eb3
+
+	measure 'Rebound Value' = SELECTEDVALUE('Rebound'[Rebound], 0)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		isHidden
+		lineageTag: cf2b1475-a1b9-4a40-ac93-e0351225ad89
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column Rebound
+		isHidden
+		lineageTag: fcd9c92e-0a3b-4890-b819-0b90ae16b66e
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Rebound = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(-5), CURRENCY(5), CURRENCY(0.25))
+
+	annotation PBI_Id = 187a26327ca440dfb3c7a86248ee5d91
+

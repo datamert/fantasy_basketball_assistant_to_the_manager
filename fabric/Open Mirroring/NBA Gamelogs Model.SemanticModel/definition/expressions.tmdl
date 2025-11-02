@@ -1,0 +1,11 @@
+expression 'DirectLake - NBA_Data' =
+		let
+		    Source = AzureStorage.DataLake("https://onelake.dfs.fabric.microsoft.com/66503be7-cb73-4bf0-b14c-dfcdd90f8f13/3360992c-6f78-4136-83fb-402828ede5d7", [HierarchicalNavigation=true])
+		in
+		    Source
+	lineageTag: a279a646-a548-49dd-83d4-00aacc2b4461
+
+	annotation PBI_IncludeFutureArtifacts = False
+
+	annotation PBI_RemovedChildren = [{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[dbo].[sys_dq_metrics]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[injury].[nba_injured_players_latest]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[nba_api].[playergamelogs]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[dbo].[players_to_track_injuries]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[dbo].[dim_nba_teams_static]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[dbo].[dim_nba_players_static]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[injury].[nba_injury_reports_raw]"}},"objectType":"Table"}]
+

@@ -1,0 +1,32 @@
+table '3-point Shots Missed'
+	isHidden
+	lineageTag: 193fac95-f583-430a-8d95-aef5988fb4c8
+
+	measure '3-point Shots Missed Value' = SELECTEDVALUE('3-point Shots Missed'[3-point Shots Missed], 0)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		isHidden
+		lineageTag: 1f0670a6-612a-4bba-8d38-4378f73c334e
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column '3-point Shots Missed'
+		isHidden
+		lineageTag: 0864434d-8971-40fe-949c-668545adc603
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition '3-point Shots Missed' = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(-5), CURRENCY(5), CURRENCY(0.25))
+
+	annotation PBI_Id = 0eaa3dc32efe496b9afd19ef493bf6f0
+

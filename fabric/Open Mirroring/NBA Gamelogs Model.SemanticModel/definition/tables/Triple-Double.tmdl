@@ -1,0 +1,32 @@
+table Triple-Double
+	isHidden
+	lineageTag: ca13c46e-9f29-4587-b85b-e52a7f077e60
+
+	measure 'Triple-Double Value' = SELECTEDVALUE('Triple-Double'[Triple-Double], 2)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		isHidden
+		lineageTag: da11ba3c-84f4-43e6-a9ca-c43a3fd97371
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column Triple-Double
+		isHidden
+		lineageTag: a981c7bb-66bc-4976-9f7e-a2a19902cea2
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Triple-Double = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(-5), CURRENCY(5), CURRENCY(0.25))
+
+	annotation PBI_Id = b24bd4e28bc746e7a04a0e16418b71df
+

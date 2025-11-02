@@ -1,0 +1,32 @@
+table 'Free Throws Made'
+	isHidden
+	lineageTag: 528bc059-3998-4a5f-a02b-767dfc0f2073
+
+	measure 'Free Throws Made Value' = SELECTEDVALUE('Free Throws Made'[Free Throws Made], 0)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		isHidden
+		lineageTag: 4c716109-1302-4ef8-8c29-89ff4eb32958
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Free Throws Made'
+		isHidden
+		lineageTag: aecdb9a6-eb2f-4a40-abea-429e5d2ca038
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Free Throws Made' = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(-5), CURRENCY(5), CURRENCY(0.25))
+
+	annotation PBI_Id = 8adec19f1bbf4537ad99d4731e61eafa
+

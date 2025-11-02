@@ -1,0 +1,32 @@
+table 'Field Goals Made'
+	isHidden
+	lineageTag: d41f4b91-54df-491d-b890-eb97aeab611c
+
+	measure 'Field Goals Made Value' = SELECTEDVALUE('Field Goals Made'[Field Goals Made], 0)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		isHidden
+		lineageTag: e93038b1-7543-4107-8a9a-ff68419f90d1
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Field Goals Made'
+		isHidden
+		lineageTag: e4a278b2-ac76-4b57-bfb9-f2fdf2754968
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Field Goals Made' = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(-5), CURRENCY(5), CURRENCY(0.25))
+
+	annotation PBI_Id = 0f8bdd15585c4f92a9141eb534192329
+

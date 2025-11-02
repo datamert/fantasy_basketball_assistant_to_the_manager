@@ -1,0 +1,32 @@
+table 'Points Scored'
+	isHidden
+	lineageTag: fdcc7a91-75ab-45d4-a4fd-f470cf0788e4
+
+	measure 'Points Scored Value' = SELECTEDVALUE('Points Scored'[Points Scored], 0.5)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		isHidden
+		lineageTag: ed254aba-e2c3-461a-a6d7-45447c9c4d66
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Points Scored'
+		isHidden
+		lineageTag: 318b731f-ad8c-401b-82a2-2bf6846ba282
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Points Scored' = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(-5), CURRENCY(5), CURRENCY(0.25))
+
+	annotation PBI_Id = 5bc730a11b134416a8c2edd9e2af5d64
+

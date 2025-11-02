@@ -1,0 +1,88 @@
+table dim_team
+	lineageTag: e826a081-53e4-4baa-bc73-f343ea95cb13
+	sourceLineageTag: [semantic].[dim_team]
+
+	column ID
+		dataType: int64
+		formatString: 0
+		lineageTag: f10c98f3-04c5-4607-82fb-3cf2bc5527f1
+		sourceLineageTag: ID
+		summarizeBy: none
+		sourceColumn: ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: b24566b1-3707-4c3c-8012-af1a0b648dc3
+		sourceLineageTag: Name
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Abbreviation
+		dataType: string
+		lineageTag: c87d2566-4360-4e8a-8023-4a83196c3114
+		sourceLineageTag: Abbreviation
+		summarizeBy: none
+		sourceColumn: Abbreviation
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nickname
+		dataType: string
+		lineageTag: 7b9f6b24-efea-40d6-81e3-2de193879a54
+		sourceLineageTag: Nickname
+		summarizeBy: none
+		sourceColumn: Nickname
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: 4f378f07-a66a-4efc-b06e-56eb338b80f0
+		sourceLineageTag: City
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		lineageTag: 5493a15f-f754-425e-9e8e-93f77e441ce9
+		sourceLineageTag: State
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Founded'
+		dataType: int64
+		formatString: 0
+		lineageTag: cbe323e8-2fbb-437b-bda9-3ed356e9769d
+		sourceLineageTag: Year Founded
+		summarizeBy: none
+		sourceColumn: Year Founded
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Team Logo URL'
+		dataType: string
+		lineageTag: 74684a1e-2ee6-44d9-8f2b-819a86e9fa50
+		sourceLineageTag: Team Logo URL
+		dataCategory: ImageUrl
+		summarizeBy: none
+		sourceColumn: Team Logo URL
+
+		changedProperty = DataCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_team = entity
+		mode: directLake
+		source
+			entityName: dim_team
+			schemaName: semantic
+			expressionSource: 'DirectLake - NBA_Data'
+

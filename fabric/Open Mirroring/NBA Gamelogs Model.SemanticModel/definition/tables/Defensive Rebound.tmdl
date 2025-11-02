@@ -1,0 +1,32 @@
+table 'Defensive Rebound'
+	isHidden
+	lineageTag: 8c2cf849-bb9f-4049-b7fc-5845bab4b2b0
+
+	measure 'Defensive Rebound Value' = SELECTEDVALUE('Defensive Rebound'[Defensive Rebound], 0.5)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		isHidden
+		lineageTag: 0f08f100-0c4d-472b-b84e-db604dd8f0c4
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Defensive Rebound'
+		isHidden
+		lineageTag: c568c9df-cd8f-4111-9f32-b75d10f553fe
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Defensive Rebound' = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(-5), CURRENCY(5), CURRENCY(0.25))
+
+	annotation PBI_Id = 02df1b42ff3a4e919ecf6def230167c2
+

@@ -1,0 +1,15 @@
+relationship 640d302f-15af-830a-c487-781c99f76e9a
+	relyOnReferentialIntegrity
+	fromColumn: fct_gamelogs.'Team ID'
+	toColumn: dim_team.ID
+
+relationship 28f9e817-f9d3-ff85-e727-9d10f3e13e61
+	relyOnReferentialIntegrity
+	fromColumn: fct_gamelogs.'Player ID'
+	toColumn: dim_player.ID
+
+relationship 65a3e2f6-0e11-cb62-9b76-4b1673dcf8eb
+	relyOnReferentialIntegrity
+	fromColumn: fct_gamelogs.'Game Date'
+	toColumn: dim_game_date.'Game Date'
+

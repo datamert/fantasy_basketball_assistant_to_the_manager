@@ -1,0 +1,32 @@
+table 'Free Throws Attempted'
+	isHidden
+	lineageTag: 72bcf606-4468-4aa2-9d7e-a2cd7ae424bf
+
+	measure 'Free Throws Attempted Value' = SELECTEDVALUE('Free Throws Attempted'[Free Throws Attempted], 0)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		isHidden
+		lineageTag: f47abec7-4b75-4233-94af-2d8d4d775059
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Free Throws Attempted'
+		isHidden
+		lineageTag: 59d6a044-4d8f-43de-b5cb-e4cd092197b0
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Free Throws Attempted' = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(-5), CURRENCY(5), CURRENCY(0.25))
+
+	annotation PBI_Id = 28f35ac538984233a4d82f9e6819d047
+

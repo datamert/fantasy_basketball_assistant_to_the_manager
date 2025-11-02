@@ -1,0 +1,32 @@
+table '15+ Assists Bonus'
+	isHidden
+	lineageTag: 1ab177b0-87fa-4f77-83e0-5ce34417a172
+
+	measure '15+ Assists Bonus Value' = SELECTEDVALUE('15+ Assists Bonus'[15+ Assists Bonus], 0)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		isHidden
+		lineageTag: 3bfb69d5-fb4f-4e0c-9479-fb15b5e8f5bd
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column '15+ Assists Bonus'
+		isHidden
+		lineageTag: c6d90835-8e7c-4fcf-9d20-cfe21995b85f
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition '15+ Assists Bonus' = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(-5), CURRENCY(5), CURRENCY(0.25))
+
+	annotation PBI_Id = 8e88b7a31cce44919e59dc909e9e70ce
+

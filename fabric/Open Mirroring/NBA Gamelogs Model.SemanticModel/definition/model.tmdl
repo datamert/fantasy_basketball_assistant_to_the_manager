@@ -1,0 +1,45 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["DirectLake - NBA_Data"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DirectLakeOnOneLakeInWeb","WebModelingEdit"]
+
+ref table fct_gamelogs
+ref table dim_team
+ref table dim_player
+ref table dim_game_date
+ref table 'Points Scored'
+ref table Rebound
+ref table Assist
+ref table Steal
+ref table Block
+ref table Turnover
+ref table Double-Double
+ref table Triple-Double
+ref table 'Technical Foul'
+ref table 'Flagrant Foul'
+ref table 'Personal Foul'
+ref table Plus/minus
+ref table 'Field Goals Made'
+ref table 'Field Goals Attempted'
+ref table 'Free Throws Made'
+ref table 'Free Throws Missed'
+ref table 'Free Throws Attempted'
+ref table '3-point Shots Made'
+ref table '3-point Shots Attempted'
+ref table '3-point Shots Missed'
+ref table 'Offensive Rebound'
+ref table 'Defensive Rebound'
+ref table '40+ Points Bonus'
+ref table '50+ Points Bonus'
+ref table '15+ Assists Bonus'
+ref table '20+ Rebounds Bonus'
+

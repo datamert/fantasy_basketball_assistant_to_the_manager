@@ -1,0 +1,32 @@
+table Block
+	isHidden
+	lineageTag: 3a320e91-6283-4c7e-bb30-13825af137dc
+
+	measure 'Block Value' = SELECTEDVALUE('Block'[Block], 2)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		isHidden
+		lineageTag: 8ab8dc09-134b-44f0-a088-eaf3ad0c94df
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column Block
+		isHidden
+		lineageTag: 082aba92-d9e6-423a-901f-310298860680
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Block = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(-5), CURRENCY(5), CURRENCY(0.25))
+
+	annotation PBI_Id = d226adea6eea44c5b1c96194f7676e78
+

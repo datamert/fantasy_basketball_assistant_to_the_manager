@@ -1,0 +1,106 @@
+table dim_player
+	lineageTag: ab7a8b1f-836c-43ec-9827-bd6a6c29cc7b
+	sourceLineageTag: [semantic].[dim_player]
+
+	measure 'Current Team' =
+			
+			VAR LatestGameDate = MAX(fct_gamelogs[Game Date])
+			VAR LatestTeamID = CALCULATE(MAX(fct_gamelogs[Team ID]), fct_gamelogs[Game Date] = LatestGameDate)
+			RETURN LOOKUPVALUE(dim_team[Name], dim_team[ID], LatestTeamID)
+		lineageTag: 426a2bee-a0ca-48ff-a261-1388e6182d6e
+
+		changedProperty = Name
+
+	measure 'Current Team Logo URL' =
+			
+			VAR LatestGameDate = MAX(fct_gamelogs[Game Date])
+			VAR LatestTeamID = CALCULATE(MAX(fct_gamelogs[Team ID]), fct_gamelogs[Game Date] = LatestGameDate)
+			RETURN LOOKUPVALUE(dim_team[Team Logo URL], dim_team[ID], LatestTeamID)
+		lineageTag: b9c92dd6-b2cf-4bfb-925c-76bd86ff39e6
+		dataCategory: ImageUrl
+
+		changedProperty = Name
+
+		changedProperty = DataCategory
+
+	measure 'Current Status' = COALESCE(FIRSTNONBLANKVALUE('dim_player'[Current Injury Status], 1), "Available")
+		lineageTag: 72732bdd-5039-4b7d-9b8f-e68e2fc00901
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Name
+		dataType: string
+		lineageTag: e8881c71-4f84-4c91-954c-8fb94a9efd51
+		sourceLineageTag: Name
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 8224a85b-7e11-4d8f-8b34-df0afde74152
+		sourceLineageTag: ID
+		summarizeBy: none
+		sourceColumn: ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Player Headshot URL'
+		dataType: string
+		lineageTag: 5965f772-7a89-46c2-86d3-982266b504b7
+		sourceLineageTag: Player Headshot URL
+		dataCategory: ImageUrl
+		summarizeBy: none
+		sourceColumn: Player Headshot URL
+
+		changedProperty = DataCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'First Name'
+		dataType: string
+		lineageTag: ea36b8bb-c438-4ca0-92e0-24688389c13b
+		sourceLineageTag: First Name
+		summarizeBy: none
+		sourceColumn: First Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Name'
+		dataType: string
+		lineageTag: 8872abf7-3e68-4603-9802-6687db407014
+		sourceLineageTag: Last Name
+		summarizeBy: none
+		sourceColumn: Last Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Current Injury Status'
+		dataType: string
+		lineageTag: ff353669-97a7-4b39-9eb5-cc838c6f1ceb
+		sourceLineageTag: Current Injury Status
+		summarizeBy: none
+		sourceColumn: Current Injury Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Current Injury'
+		dataType: string
+		lineageTag: 8d06feed-43e3-4282-a4a4-713d4118c235
+		sourceLineageTag: Current Injury
+		summarizeBy: none
+		sourceColumn: Current Injury
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_player = entity
+		mode: directLake
+		source
+			entityName: dim_player
+			schemaName: semantic
+			expressionSource: 'DirectLake - NBA_Data'
+

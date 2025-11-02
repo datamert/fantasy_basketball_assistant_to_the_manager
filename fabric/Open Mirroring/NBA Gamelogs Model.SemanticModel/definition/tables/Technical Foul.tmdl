@@ -1,0 +1,32 @@
+table 'Technical Foul'
+	isHidden
+	lineageTag: ce93fe34-3de6-48ec-98f9-335585da1e11
+
+	measure 'Technical Foul Value' = SELECTEDVALUE('Technical Foul'[Technical Foul], -2)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		isHidden
+		lineageTag: 47d74fb6-4fa9-481b-8feb-aa794265e19b
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Technical Foul'
+		isHidden
+		lineageTag: a3444a0e-1a67-4070-a884-4bec46567efe
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Technical Foul' = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(-5), CURRENCY(5), CURRENCY(0.25))
+
+	annotation PBI_Id = f26783a1c5e54d40aa90a3b3ff007ded
+

@@ -1,0 +1,32 @@
+table Plus/minus
+	isHidden
+	lineageTag: a14529bc-f370-4403-a5e3-398f1d63dc82
+
+	measure 'Plus/minus Value' = SELECTEDVALUE('Plus/minus'[Plus/minus], 0)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		isHidden
+		lineageTag: e52fb391-6704-44f6-8ddb-e628f03475f7
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column Plus/minus
+		isHidden
+		lineageTag: f56bb4f1-4f22-460f-b157-087c445f7925
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Plus/minus = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(-5), CURRENCY(5), CURRENCY(0.25))
+
+	annotation PBI_Id = 4f27322558b64124b7f101e1104dad9e
+

@@ -1,0 +1,32 @@
+table '3-point Shots Made'
+	isHidden
+	lineageTag: 22cc0958-4f7c-47db-a7a7-83196dab4081
+
+	measure '3-point Shots Made Value' = SELECTEDVALUE('3-point Shots Made'[3-point Shots Made], 0.5)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		isHidden
+		lineageTag: a564960f-467d-4c78-888a-0ae177468974
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column '3-point Shots Made'
+		isHidden
+		lineageTag: 6cb96916-6d67-46f4-a7f5-9c42f9efc8ea
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition '3-point Shots Made' = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(-5), CURRENCY(5), CURRENCY(0.25))
+
+	annotation PBI_Id = 99aa016aa44b4196944cc0ddd99fe61e
+

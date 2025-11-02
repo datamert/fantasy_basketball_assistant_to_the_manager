@@ -1,0 +1,32 @@
+table Double-Double
+	isHidden
+	lineageTag: 2463e583-ca6e-4c61-b2e4-416c977b09fe
+
+	measure 'Double-Double Value' = SELECTEDVALUE('Double-Double'[Double-Double], 1)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		isHidden
+		lineageTag: 8d56a6b8-3602-4dd4-95e4-4c9329ffe15f
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column Double-Double
+		isHidden
+		lineageTag: fdcaa5dc-e78d-4d55-b7e1-706c76c609b8
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Double-Double = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(-5), CURRENCY(5), CURRENCY(0.25))
+
+	annotation PBI_Id = 88692e791b304c0e84e902a2faf58e12
+

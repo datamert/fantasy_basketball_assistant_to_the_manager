@@ -1,0 +1,32 @@
+table 'Personal Foul'
+	isHidden
+	lineageTag: a22d5cfd-7014-43e0-a1a1-88b0da570c85
+
+	measure 'Personal Foul Value' = SELECTEDVALUE('Personal Foul'[Personal Foul], 0)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		isHidden
+		lineageTag: 0f548511-8e49-455e-8ba7-24278a4813b1
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Personal Foul'
+		isHidden
+		lineageTag: 0d7fcdfe-ee0d-4781-85ba-6505c7871a2b
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Personal Foul' = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(-5), CURRENCY(5), CURRENCY(0.25))
+
+	annotation PBI_Id = e9b4c6c0d829495195d77da8d2b09507
+

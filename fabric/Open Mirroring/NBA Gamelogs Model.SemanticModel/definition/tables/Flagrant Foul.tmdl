@@ -1,0 +1,32 @@
+table 'Flagrant Foul'
+	isHidden
+	lineageTag: 22654214-2fd1-45f0-9537-8a2004980cf0
+
+	measure 'Flagrant Foul Value' = SELECTEDVALUE('Flagrant Foul'[Flagrant Foul], -2)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		isHidden
+		lineageTag: 2b9c2657-73d3-415f-a99b-3f22685f216b
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Flagrant Foul'
+		isHidden
+		lineageTag: b1d0c3f2-403e-4d9e-8c6f-fa0b9bd59e21
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Flagrant Foul' = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(-5), CURRENCY(5), CURRENCY(0.25))
+
+	annotation PBI_Id = b44bd4497d3940b39635e6ad0c115abf
+

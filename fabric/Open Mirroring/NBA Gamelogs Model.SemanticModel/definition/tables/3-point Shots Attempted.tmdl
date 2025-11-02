@@ -1,0 +1,32 @@
+table '3-point Shots Attempted'
+	isHidden
+	lineageTag: fb520ba1-adb1-462b-ae9b-d6d05901e481
+
+	measure '3-point Shots Attempted Value' = SELECTEDVALUE('3-point Shots Attempted'[3-point Shots Attempted], 0)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		isHidden
+		lineageTag: 32e13aa3-446c-43a4-b00b-d5a47d133ea6
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column '3-point Shots Attempted'
+		isHidden
+		lineageTag: e4f44572-fdf0-4bfe-870a-cb6b2458ee94
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition '3-point Shots Attempted' = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(-5), CURRENCY(5), CURRENCY(0.25))
+
+	annotation PBI_Id = 7ac897870e434a3abe836c6fd2ead2c3
+

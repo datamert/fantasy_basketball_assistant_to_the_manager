@@ -13,9 +13,17 @@ The most important dataset is player gamelogs which are queried from NBA using t
 ![Fabric lineage view](readme_images/fabric_lineage_view.png)
 
 After the data lands to the Fabric workspace, there are multiple components (described in detail in the next section) that power:
-- **Latest NBA News and Injuries:** a Real-Time Dashboard that visualizes, in real-time, the injury status of players by game along with the latest ESPN news on the NBA. This helps fantasy basketball managers to decide their starting roster and stream 'injury-replacement' players by providing them the latest news in one place.
-- **Injury Tracker of My Players:** an Activator with an alert that sends an email when one of the manager's players' injury status changes. This alert fantasy basketball managers to make roster changes in time for upcoming games.
 - **NBA Player Gamelog Analysis:** a Power BI report that provides insights into each NBA player's stats and fantasy points with dynamic scoring settings. This provides an in-depth dive to each player's profile as well as a player ranking list that can be based on statistical metrics different to the default rankings of fantasy basketball platforms.
+
+![Player profile](readme_images/player_profile.png)
+
+![Player ranking](readme_images/player_ranking.png)
+  
+- **Latest NBA News and Injuries:** a Real-Time Dashboard that visualizes, in real-time, the injury status of players by game along with the latest ESPN news on the NBA. This helps fantasy basketball managers to decide their starting roster and stream 'injury-replacement' players by providing them the latest news in one place.
+
+![Live report](readme_images/live_report.png)
+  
+- **Injury Tracker of My Players:** an Activator with an alert that sends an email when one of the manager's players' injury status changes. This alert fantasy basketball managers to make roster changes in time for upcoming games.
 
 ## 3. Components
 ### 3.1. Google Jobs
@@ -28,22 +36,22 @@ This is a collection of files that are used to create a Docker image on Google C
 ### 3.2. Fabric
 #### 3.2.1. Open Mirroring
 ##### 3.2.1.1. Create Materialized Lake Views.Notebook
-This notebook is used to create Materialized Lake Views (MLV) within the NBA_Date lakehouse. The lakehouse obtains data from multiple sources including a couple of shortcuts, so MLVs are useful in creating a 'gold layer' of tables under the semantic schema that can then be used to build a star-schema semantic model for a Power BI report. By later scheduling a daily refresh of the MLVs, I am able to achieve multi-table atomicity. The notebook itself is relatively straightforward with a collection of SQL scripts to create MLVs. 
+This notebook is used to create Materialized Lake Views (MLV) within the NBA_Data lakehouse. The lakehouse obtains data from multiple sources including a couple of shortcuts, so MLVs are useful in creating a 'gold layer' of tables under the semantic schema that can then be used to build a star-schema semantic model for a Power BI report. By later scheduling a daily refresh of the MLVs, I am able to achieve multi-table atomicity. The notebook itself is relatively straightforward with a collection of SQL scripts to create MLVs. 
 ##### 3.2.1.2. NBA API Google Job Mirror.MirroredDatabase
 This is the key artifact used to create a Landing Zone where the results from the nba_api playerlogs endpoint are directly written, in parquet format, by the generate_gamelog Google Jobs. The Fabric infrastructure then automatically creates and manages a delta table based on the written parquet files.
 ##### 3.2.1.3. NBA Gamelogs Model.SemanticModel
-This is semantic model with a Direct Lake on OneLake connection to the tables under the semantic schema in the NBA_Date lakehouse. This semantic model hosts relationships betweeens these tables, measures and numeric parameters later used by the NBA Player Gamelog Analysis.Report
+This is semantic model with a Direct Lake on OneLake connection to the tables under the semantic schema in the NBA_Data lakehouse. This semantic model hosts relationships betweeens these tables, measures and numeric parameters later used by the NBA Player Gamelog Analysis.Report
 ##### 3.2.1.4. NBA Player Gamelog Analysis.Report
 This is a Power BI report that is based on the NBA Gamelogs Model.SemanticModel (as a thin file with no semantic model of its own). It consists of 3 pages. The first page provides an interface for users to control the fantasy scoring settings using numeric parameter sliders. The second page provides a deep-dive into any active NBA player's profile and fantasy performance. The third page provides a player ranking list with key metrics to compare players with.
-##### 3.2.1.5. NBA_Date.Lakehouse
+##### 3.2.1.5. NBA_Data.Lakehouse
 This is the center of the Open Mirroring architecture where there is a shortcut to the MirroredDatabase, a shortcut to one of the tables from the NBA_Injury_reports.Evenstream, additional tables loaded in using a dataflow and notebook, and finally a collection of materialized lake views that form the semantic tables.
 ##### 3.2.1.6. Query nba_api.Notebook
-This is the Fabric notebook that loads the static tables of player and team dimensions into the NBA_Date lakehouse using the nba_api.py package. This notebook is also proof that any attempt to query the dynamic endpoints in nba_api.py will fail due to blocked IPs. 
+This is the Fabric notebook that loads the static tables of player and team dimensions into the NBA_Data lakehouse using the nba_api.py package. This notebook is also proof that any attempt to query the dynamic endpoints in nba_api.py will fail due to blocked IPs. 
 ##### 3.2.1.7. nba_api_env.Environment
 This is simply an environment with the nba_api package added and is used by the Query nba_api.Notebook.
 #### 3.2.2. Real-Time Intelligence
 ##### 3.2.2.1. Injury Tracker of My Players.Reflex
-This is an Activator artifact that tracks the latest status of injury of players coming in from the NBA_Injury_Reports.Evenstream and alerts by email if any of the manager's players' injury status changes. The list of the manager's players is provided via manual input to the List of Players for Injury Tracking.Dataflow which writes the list into the NBA_Date lakehouse that in return has a shortcut into the NBA_News_and_Injuries.Eventhouse - here, a KQL query joins this list with the data from the evenstream.
+This is an Activator artifact that tracks the latest status of injury of players coming in from the NBA_Injury_Reports.Evenstream and alerts by email if any of the manager's players' injury status changes. The list of the manager's players is provided via manual input to the List of Players for Injury Tracking.Dataflow which writes the list into the NBA_Data lakehouse that in return has a shortcut into the NBA_News_and_Injuries.Eventhouse - here, a KQL query joins this list with the data from the evenstream.
 ##### 3.2.2.2. Latest NBA News and Injuries.KQLDashboard
 This is a Real-Time Dashboard based on the real-time data streamed into the NBA_News_and_Injuries.Eventhouse. It provides an analysis of the injury reports as well as a list of the latest NBA news from ESPN with clickable links. 
 ##### 3.2.2.3. List of Players for Injury Tracking.Dataflow
@@ -53,7 +61,7 @@ This is the evenstream that hosts a Custom Endpoint for the generate_injury_repo
 ##### 3.2.2.5. NBA_News.Evenstream
 This is the evenstream that hosts a Custom Endpoint for the generate_nba_News Google Job to land the latest NBA news from ESPN that are then loaded into the NBA_News_and_Injuries.Eventhouse.
 ##### 3.2.2.6. NBA_News_and_Injuries.Eventhouse
-This is the Eventhouse that hosts the real-time data being streamed from the NBA_News.Evenstream and NBA_Injury_Reports.Evenstream in the news and injuries databases respectively. This Eventhouse also has a shortcut to the list of players in the NBA_Date Lakehouse while also providing a shortcut to the latest status of injured players. This Eventhouse powers the Latest NBA News and Injuries KQL Dashboard as well as the Injury Tracker of My Players Activator.
+This is the Eventhouse that hosts the real-time data being streamed from the NBA_News.Evenstream and NBA_Injury_Reports.Evenstream in the news and injuries databases respectively. This Eventhouse also has a shortcut to the list of players in the NBA_Data Lakehouse while also providing a shortcut to the latest status of injured players. This Eventhouse powers the Latest NBA News and Injuries KQL Dashboard as well as the Injury Tracker of My Players Activator.
 
 ## 4. Setup & Usage
 ### 4.1. Licenses and Accounts
@@ -87,6 +95,7 @@ Having set this up, I first load in the full dataset of gamelogs from the previo
 
 ## 5. License
 MIT License
+
 
 
 

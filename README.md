@@ -5,7 +5,7 @@ The Fantasy Basketball Assistant (to the) Manager is a full-stack data (minimum 
 ## 2. Architecture Overview
 The Fantasy Basketball Assistant (to the) Manager is built primarily on Microsoft Fabric, using data from NBA and ESPN, with Google Cloud Platform acting as an intermediary.
 
-![Data ingestion view](readme_images/data_ingestion_view.png)
+![Data ingestion diagram](readme_images/data_ingestion_diagram.png)
 
 The most important dataset is player gamelogs which are queried from NBA using the open-source nba_api.py package. The challenge with using this package in a Fabric environment is that the IPs used by Fabric Notebooks—like most cloud platform IPs—are blocked by the NBA API and therefore calls to dynamic endpoints return a ReadTimeout error: HTTPSConnectionPool(host='stats.nba.com', port=443): Read timed out. (read timeout=30). Research on this topic with help from Copilot led me to use Google Cloud Platform that had whitelisted IPs. So I built a Google Job (run with Google Scheduler) that is a Docker image based on a Python script that queries the playergamelogs endpoint. To avoid the overhead of storing the query result in an intermediary storage and then having to run an ETL from Fabric, I opted to use the Open Mirroring Database feature on Fabric. This way, I am able to write the query result directly into a OneLake Landing Zone that are then automatically converted to managed delta tables in Fabric. Building on the Google Job for gamelogs, I also created Google Jobs to query data from ESPN and NBA injury reports, using parserfeed and nbainjuries.py respectively, and write them directly to a Custom Endpoint of Fabric Evenstream. These jobs can be run at a high frequency to simulate real-time data.
 
@@ -67,6 +67,7 @@ When first creating the table in the Open Mirroring database, I passed 1 to the 
 
 ## 5. License
 MIT License
+
 
 
 

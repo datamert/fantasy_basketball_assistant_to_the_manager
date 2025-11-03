@@ -31,12 +31,36 @@ Text
 Text
 ##### 3.2.1.2. NBA API Google Job Mirror.MirroredDatabase
 Text
+##### 3.2.1.3. NBA Gamelogs Model.SemanticModel
+Text
+##### 3.2.1.4. NBA Player Gamelog Analysis.Report
+Text
+##### 3.2.1.5. NBA_Date.Lakehouse
+Text
+##### 3.2.1.6. Query nba_api.Notebook
+Text
+##### 3.2.1.7. nba_api_env.Environment
+Text
+#### 3.2.2. Real-Time Intelligence
+##### 3.2.2.1. Injury Tracker of My Players.Reflex
+Text
+##### 3.2.2.2. Latest NBA News and Injuries.KQLDashboard
+Text
+##### 3.2.2.3. List of Players for Injury Tracking.Dataflow
+Text
+##### 3.2.2.4. NBA_Injury_Reports.Evenstream
+Text
+##### 3.2.2.5. NBA_News.Evenstream
+Text
+##### 3.2.2.6. NBA_News_and_Injuries.Eventhouse
+Text
 
 ## 4. Setup & Usage
 Text
 
 ## 5. License
 Text
+
 
 
 

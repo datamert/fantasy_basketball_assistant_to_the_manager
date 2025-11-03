@@ -59,7 +59,10 @@ This is the Eventhouse that hosts the real-time data being streamed from the NBA
 ### 4.1. Licenses and Accounts
 This product was built using a Free Trial account on both Fabric and on Google Cloud platform.
 ### 4.2. Setup of Google Jobs
-I created the Google Jobs of Docker images using the Google Cloud Shell. I uploaded / created the collection of files used for each Docker image into the temproary memory of the Google Cloud Shell editor before running the build command. After creating the Google Jobs, I configured them with variables and secrets, and then scheduled them using Google Cloud Scheduler.
+I created the Google Jobs of Docker images using the Google Cloud Shell. I uploaded / created the collection of files used for each Docker image into the temproary memory of the Google Cloud Shell editor before running the build command. After creating the Google Jobs, I configured them with variables and secrets, and then scheduled them using Google Cloud Scheduler:
+- **generate_gamelog:** every day at 8 am CET
+- **generate_injury_report:** every 5-30 minutes (depending on the capacity usage of Fabric)
+- **generate_nba_news:** every 5-30 minutes (depending on the capacity usage of Fabric)
 ### 4.3. Setup of Fabric Open Mirror
 When first creating the table in the Open Mirroring database, I passed 1 to the optional variable "CREATE_TABLE" of the generate_gamelog Google Job. This created a table with the key_cols as defined in the script along with a json file. I then manually edited this json file, using OneLake explorer, to add the argument "isUpsertDefaultRowMarker": true as seen below. This is crucial in enabling my incremental refresh policy - I can now write additional parquet files into the same table location within the Open Mirror Landing zone and Fabric will treat each new row as UPSERT meaning that it will either replace the previous version of the row or create a new row if it doesn't already exist. This argument saves me from having to pass an additional __rowMarker__ column in my parquet files since I want to default to UPSERT anyway. Having set this up, I first load in the full dataset of gamelogs from the previous season (2024-25) and then I set up the generate_gamelog job to run once a day every morning to load in the dataset of gamelogs from the current season (2025-26). This treats the current season as the partition that gets replaced with every run.
 
@@ -67,6 +70,7 @@ When first creating the table in the Open Mirroring database, I passed 1 to the 
 
 ## 5. License
 MIT License
+
 
 
 

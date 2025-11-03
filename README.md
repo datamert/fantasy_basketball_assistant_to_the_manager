@@ -9,6 +9,7 @@ The Fantasy Basketball Assistant (to the) Manager is built primarily on Microsof
 
 The most important dataset is player gamelogs which are queried from NBA using the open-source nba_api.py package. The challenge with using this package in a Fabric environment is that the IPs used by Fabric Notebooks—like most cloud platform IPs—are blocked by the NBA API and therefore calls to dynamic endpoints return a ReadTimeout error: HTTPSConnectionPool(host='stats.nba.com', port=443): Read timed out. (read timeout=30). Research on this topic with help from Copilot led me to use Google Cloud Platform that had whitelisted IPs. So I built a Google Job (run with Google Scheduler) that is a Docker image based on a Python script that queries the playergamelogs endpoint. To avoid the overhead of storing the query result in an intermediary storage and then having to run an ETL from Fabric, I opted to use the Open Mirroring Database feature on Fabric. This way, I am able to write the query result directly into a OneLake Landing Zone that are then automatically converted to managed delta tables in Fabric. Building on the Google Job for gamelogs, I also created Google Jobs to query data from ESPN and NBA injury reports, using parserfeed and nbainjuries.py respectively, and write them directly to a Custom Endpoint of Fabric Evenstream. These jobs can be run at a high frequency to simulate real-time data.
 
+
 ![Fabric lineage view](readme_images/fabric_lineage_view.png)
 
 After the data lands to the Fabric workspace, there are multiple components (described in detail in the next section) that power:
@@ -17,6 +18,18 @@ After the data lands to the Fabric workspace, there are multiple components (des
 - **NBA Player Gamelog Analysis:** a Power BI report that provides insights into each NBA player's stats and fantasy points with dynamic scoring settings. This provides an in-depth dive to each player's profile as well as a player ranking list that can be based on statistical metrics different to the default rankings of fantasy basketball platforms.
 
 ## 3. Components
+### 3.1. Google Jobs
+#### 3.1.1. generate_gamelog
+Text
+#### 3.1.2. generate_injury_report
+Text
+#### 3.1.3. generate_nba_news
+Text
+### 3.2. Fabric
+#### 3.2.1. Open Mirroring
+##### 3.2.1.1. Create Materialized Lake Views.Notebook
+Text
+##### 3.2.1.2. NBA API Google Job Mirror.MirroredDatabase
 Text
 
 ## 4. Setup & Usage
@@ -24,6 +37,7 @@ Text
 
 ## 5. License
 Text
+
 
 
 

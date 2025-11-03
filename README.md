@@ -20,30 +20,30 @@ After the data lands to the Fabric workspace, there are multiple components (des
 ## 3. Components
 ### 3.1. Google Jobs
 #### 3.1.1. generate_gamelog
-Text
+This is a collection of files that are used to create a Docker image on Google Cloud as a Job. The main python script queries the playergamelogs endpoint from the nba_api.py package and writes it into Fabric Open Mirror Database's landing zone using the openmirroring_operations.py package. Note that the openmirroring_operations.py is not available to be installed from the public python library and is therefore loaded directly into the docker image instead of being listed in requirements.txt. The python script also has an optional script to create a table in the landing zone in case of the first time. This can be invoked by passing 1 to the optional variable "CREATE_TABLE" when running the Google Job. The created table has the argument key_cols = ["PLAYER_ID", "GAME_ID"] which are crucial for implementing an incremental refresh.
 #### 3.1.2. generate_injury_report
-Text
+This is a collection of files that are used to create a Docker image on Google Cloud as a Job. The main python script queries injury reports using the nbainjuries.py package and writes it into a Custom Endpoint created within a Fabric Evenstream. The query takes a timestamp as an argument in order to return the injury reports as a snapshot. I noticed that the latest snapshots available are based on the GMT-4 or GMT-5 timezone, so I conservatively call the snapshot from GMT-5 timezone to simulate real-time data.
 #### 3.1.3. generate_nba_news
-Text
+This is a collection of files that are used to create a Docker image on Google Cloud as a Job. The main python script simple queries the latest list of ESPN articles using the parserfeed package and writes it into a Custom Endpoint created within a Fabric Evenstream.
 ### 3.2. Fabric
 #### 3.2.1. Open Mirroring
 ##### 3.2.1.1. Create Materialized Lake Views.Notebook
-Text
+This notebook is used to create Materialized Lake Views (MLV) within the NBA_Date lakehouse. The lakehouse obtains data from multiple sources including a couple of shortcuts, so MLVs are useful in creating a 'gold layer' of tables under the semantic schema that can then be used to build a star-schema semantic model for a Power BI report. By later scheduling a daily refresh of the MLVs, I am able to achieve multi-table atomicity. The notebook itself is relatively straightforward with a collection of SQL scripts to create MLVs. 
 ##### 3.2.1.2. NBA API Google Job Mirror.MirroredDatabase
-Text
+This is the key artifact used to create a Landing Zone where the results from the nba_api playerlogs endpoint are directly written, in parquet format, by the generate_gamelog Google Jobs. The Fabric infrastructure then automatically creates and manages a delta table based on the written parquet files.
 ##### 3.2.1.3. NBA Gamelogs Model.SemanticModel
-Text
+This is semantic model with a Direct Lake on OneLake connection to the tables under the semantic schema in the NBA_Date lakehouse. This semantic model hosts relationships betweeens these tables, measures and numeric parameters later used by the NBA Player Gamelog Analysis.Report
 ##### 3.2.1.4. NBA Player Gamelog Analysis.Report
-Text
+This is a Power BI report that is based on the NBA Gamelogs Model.SemanticModel (as a thin file with no semantic model of its own). It consists of 3 pages. The first page provides an interface for users to control the fantasy scoring settings using numeric parameter sliders. The second page provides a deep-dive into any active NBA player's profile and fantasy performance. The third page provides a player ranking list with key metrics to compare players with.
 ##### 3.2.1.5. NBA_Date.Lakehouse
-Text
+This is the center of the Open Mirroring architecture where there is a shortcut to the MirroredDatabase, a shortcut to one of the tables from the NBA_Injury_reports.Evenstream, additional tables loaded in using a dataflow and notebook, and finally a collection of materialized lake views that form the semantic tables.
 ##### 3.2.1.6. Query nba_api.Notebook
-Text
+This is the Fabric notebook that loads the static tables of player and team dimensions into the NBA_Date lakehouse using the nba_api.py package. On the other hand, this notebook is also proof that any attempt to query the dynamic endpoints in nba_api.py will fail due to blocked IPs. 
 ##### 3.2.1.7. nba_api_env.Environment
-Text
+This is simply an environment with the nba_api package added and is used by the Query nba_api.Notebook.
 #### 3.2.2. Real-Time Intelligence
 ##### 3.2.2.1. Injury Tracker of My Players.Reflex
-Text
+
 ##### 3.2.2.2. Latest NBA News and Injuries.KQLDashboard
 Text
 ##### 3.2.2.3. List of Players for Injury Tracking.Dataflow
@@ -60,6 +60,7 @@ Text
 
 ## 5. License
 Text
+
 
 
 

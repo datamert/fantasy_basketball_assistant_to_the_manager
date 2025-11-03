@@ -66,7 +66,7 @@ I created the Google Jobs of Docker images using the Google Cloud Shell. I uploa
 
 The jobs require input to some variables that connect them to the Fabric Open Mirror Landing zone or 1 of the 2 Fabric Evenstream. For the Fabric Evenstreams, the connection details that are passed to the FABRIC_EVENSTREAM_CONN_STR and FABRIC_EVENSTREAM_NAME job variables (via Google Secret manager) can be found in Fabric at:
 
-![Eventstream connection details](readme_images/evenstream_connection_details.png)
+![Eventstream connection details](readme_images/eventstream_connection_details.png)
 
 As for the Open Mirror Landing Zone, the connection details for the landing zone that are passed to the FABRIC_HOST job variable (via Google Secret manager) can be found in Fabric at:
 
@@ -87,6 +87,7 @@ Having set this up, I first load in the full dataset of gamelogs from the previo
 
 ## 5. License
 MIT License
+
 
 
 

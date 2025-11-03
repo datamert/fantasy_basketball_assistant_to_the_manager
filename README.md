@@ -1,9 +1,11 @@
 ﻿# Fantasy Basketball Assistant (to the) Manager
 ## 1. Background
-The Fantasy Basketball Assistant (to the) Manager is a full-stack data (minimum viable) product designed to empower fantasy basketball managers worldwide with advanced gamelog statistics and real-time updates from NBA news and injury reports. Fantasy basketball is a game where players act as general managers of virtual basketball teams that consist of NBA players and and their success is tied to the real-life performance of these players, based on varying scoring settings. Fantasy basketball managers are often limited to the analytics provided by their game platform i.e. data that is available to all competitors and therefore offers no strategic edge. They need an assistant manager (or an assistant to the manager — shoutout to Dwight Schrute from _The Office_) that can provide them intelligence through data to guide decision making, whether it's drafting players at the start of the season or trading them during the season. This product is an attempt to fill in this very gap.
+The Fantasy Basketball Assistant (to the) Manager is a full-stack data (minimum viable) product designed to empower fantasy basketball managers worldwide with advanced gamelog statistics and real-time updates from NBA news and injury reports. Fantasy basketball is a game where players act as general managers of virtual basketball teams that consist of NBA players and and their success is tied to the real-life performance of these players, based on varying scoring settings. Fantasy basketball managers are often limited to the analytics provided by their game platform i.e. data that is available to all competitors and therefore offers no strategic edge. They need an assistant manager (or an assistant to the manager — shoutout to Dwight Schrute from _The Office_) that can provide them intelligence through data to guide decision making, whether it's drafting players at the start of the season or trading them during the season. This is an attempt to fill in this very gap.
 
 ## 2. Architecture Overview
-Text
+The Fantasy Basketball Assistant (to the) Manager is built primarily on Microsoft Fabric, using data from NBA and ESPN, with Google Cloud Platform acting as an intermediary.
+
+The most important dataset is player gamelogs which are queried from NBA using the open-source nba_api.py package. The challenge with using this package in a Fabric environment is that the IPs used by Fabric Notebooks—like most cloud platform IPs—are blocked by the NBA API and therefore calls to dynamic endpoints return a ReadTimeout error: HTTPSConnectionPool(host='stats.nba.com', port=443): Read timed out. (read timeout=30). Research on this topic with help from Copilot led me to use Google Cloud Platform that had whitelisted IPs. So I built a Google Job (run with Google Scheduler) that is a Docker image based on a Python script that queries the playergamelogs endpoint. To avoid the overhead of storing the query result in an intermediary storage and then having to run an ETL from Fabric, I opted to use the Open Mirroring Database feature on Fabric. This way, I am able to write the query result directly into a OneLake Landing Zone that are then automatically converted to managed delta tables in Fabric. Building on the Google Job for gamelogs, I also created Google Jobs to query data from ESPN and NBA injury reports, using parserfeed and nbainjuries.py respectively, and write them directly to a Custom Endpoint of Fabric Evenstream. These jobs can be run at a high frequency to simulate real-time data.
 
 ![Data ingestion view](readme_images/data_ingestion_view.png)
 
@@ -17,4 +19,5 @@ Text
 
 ## 5. License
 Text
+
 

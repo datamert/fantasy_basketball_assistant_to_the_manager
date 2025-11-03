@@ -2,11 +2,9 @@
 ## 1. Background
 The Fantasy Basketball Assistant (to the) Manager is a full-stack, minimum viable data product built to supercharge the millions of fantasy basketball managers around the globe. It delivers advanced boxstat analytics and real-time updates from NBA news and injury reports in a competition where timing and insight are everything.
 
-Fantasy Basketball is a game where players become virtual GMs, assembling rosters of real NBA stars whose on-court performances directly impact fantasy outcomes. But most managers are stuck with the same surface-level stats offered by their platforms i.e. data that’s public, predictable, and powerless when it comes to gaining a competitive edge.
+Fantasy basketball is a game where players become virtual GMs, assembling rosters of real NBA stars whose on-court performances directly impact fantasy outcomes. But most managers are stuck with the same surface-level stats offered by their platforms i.e. data that’s public, predictable, and powerless when it comes to gaining a competitive edge. They need an assistant manager (or an assistant to the manager — shoutout to Dwight Schrute from _The Office_) that can offer data-driven intelligence to guide key decisions ranging from draft day steals to mid-season trades.
 
-That’s where the Assistant (or Assistant to the Manager—shoutout to Dwight Schrute from The Office) steps in. It’s designed to be your behind-the-scenes strategist, offering data-driven intelligence to guide key decisions—from draft day steals to mid-season trades.
-
-This project is a bold attempt to fill the gap between generic analytics and true strategic advantage. Because in fantasy basketball, winning isn’t just about watching the game—it’s about outsmarting it.
+This data product is my attempt to fill the analytics gap for fantasy basketball managers as well as my submission to the Fabric Global Hackathon 2025.
 
 ## 2. Architecture Overview
 The Fantasy Basketball Assistant (to the) Manager is built primarily on Microsoft Fabric, using data from NBA and ESPN, with Google Cloud Platform acting as an intermediary.
@@ -101,6 +99,7 @@ Having set this up, I first load in the full dataset of gamelogs from the previo
 
 ## 5. License
 MIT License
+
 
 
 
